@@ -37,7 +37,7 @@ export default function SingUp() {
 
   return (
       <div className="container flex justify-center items-center h-screen ">
-        <div className="w-96 p-5 border-2 border-gray-300 rounded-2xl shadow-2xl">
+        <div className="w-96 p-5 pb-6 border-2 border-gray-300 rounded-2xl shadow-2xl">
           <h1 className="mb-4 text-3xl font-bold">Sign Up</h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -100,7 +100,7 @@ export default function SingUp() {
                       </FormItem>
                   )}
               />
-              <Button type="submit">SignUp</Button>
+              <Button type="submit" className="w-full">SignUp</Button>
             </form>
           </Form>
         </div>
