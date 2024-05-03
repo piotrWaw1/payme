@@ -1,15 +1,15 @@
 import {FC, ReactNode} from "react";
 import {Navigate} from "react-router-dom";
-import {checkSession} from "@/utils/checkSession.ts";
+import {useSession} from "@/hooks/useSession.tsx";
 
 interface PrivateRouteProps {
   children: ReactNode;
 }
 
 const PrivateRoute: FC<PrivateRouteProps> = ({children}) => {
-
+  const session = useSession()
   return (
-      !checkSession() ? <Navigate to={'/login'}/> : children
+      !session ? <Navigate to={'/login'}/> : children
   )
 }
 export default PrivateRoute

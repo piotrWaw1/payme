@@ -27,7 +27,7 @@ export default function Login() {
       password: ""
     },
   })
-
+  
   return (
       <div className="relative w-96 p-5 border-2 border-gray-300 bg-white rounded-2xl shadow-2xl">
         <h2 className="mb-4 text-3xl font-bold">Login</h2>

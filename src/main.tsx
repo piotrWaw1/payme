@@ -8,6 +8,10 @@ import SingUp from "@/components/auth/SingUp.tsx";
 import AuthComponent from "@/components/AuthComponent.tsx";
 import PrivateRoute from "@/utils/PrivateRoute.tsx";
 import PublicRoute from "@/utils/PublicRoute.tsx";
+import {SessionProvider} from "@/context/SessionContext.tsx";
+import Dashboard from "@/dashboard/Dashboard.tsx";
+import AddPayment from "@/components/addPayment/AddPayment.tsx";
+import AddPayer from "@/components/addPayer/AddPayer.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +19,21 @@ const router = createBrowserRouter([
     element:
         <PrivateRoute>
           <App/>
-        </PrivateRoute>
+        </PrivateRoute>,
+    children: [
+      {
+        path: '/',
+        element: <Dashboard/>
+      },
+      {
+        path: '/payment',
+        element: <AddPayment/>
+      },
+      {
+        path: '/payer',
+        element: <AddPayer/>
+      }
+    ]
   },
   {
     path: '/',
@@ -39,6 +57,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
+      <SessionProvider>
         <RouterProvider router={router}/>
+      </SessionProvider>
     </React.StrictMode>,
 )

@@ -1,19 +1,27 @@
-import {Button} from "@/components/ui/button.tsx";
-import {useNavigate} from "react-router-dom";
-import {supabaseClient} from "@/clientDef.ts";
+import {Outlet} from "react-router-dom";
+import Header from "@/components/header/Header.tsx";
 
 function App() {
-  const nav = useNavigate()
-
-  const handleLogout = async () => {
-    await supabaseClient.auth.signOut()
-    nav('/login')
-  }
+  // const test = async () => {
+  //
+  //   const {error} = await supabaseClient.from('payers')
+  //       .insert({
+  //         payer_name: "B",
+  //       })
+  //   console.log(error)
+  //
+  //   // const {data,error} = await supabaseClient.from('payers').select()
+  //   // console.log(data)
+  //   // console.log(error)
+  // }
 
   return (
-      <div>
-        <Button className="bg-amber-400" onClick={handleLogout}>logout</Button>
-      </div>
+      <>
+        <Header/>
+        <div className="container mt-5">
+          <Outlet/>
+        </div>
+      </>
   )
 }
 
