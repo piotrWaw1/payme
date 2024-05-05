@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Login from "@/components/auth/Login.tsx";
 import SingUp from "@/components/auth/SingUp.tsx";
@@ -12,6 +11,7 @@ import {SessionProvider} from "@/context/SessionContext.tsx";
 import Dashboard from "@/dashboard/Dashboard.tsx";
 import AddPayment from "@/components/addPayment/AddPayment.tsx";
 import AddPayer from "@/components/addPayer/AddPayer.tsx";
+import './index.css'
 
 const router = createBrowserRouter([
   {

@@ -18,7 +18,7 @@ function App() {
   return (
       <>
         <Header/>
-        <div className="container mt-5">
+        <div className="container mt-10">
           <Outlet/>
         </div>
       </>
