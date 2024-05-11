@@ -1,11 +1,27 @@
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import usePayers from "@/hooks/usePayers.tsx";
+import {
+  Dialog, DialogClose,
+  DialogContent,
+  DialogDescription, DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {Button} from "@/components/ui/button.tsx";
+import {supabaseClient} from "@/clientDef.ts";
 
 
 export default function PayersTable() {
 
-  const {payersData} = usePayers()
+  const {getPayers, payersData} = usePayers()
+
+  const payerDelete = async (id: number) => {
+    const {error} = await supabaseClient.from('payers').delete().eq('id', id)
+    void getPayers()
+    console.log(error)
+  }
 
   return (
       <Table className="border-2 ">
@@ -29,12 +45,32 @@ export default function PayersTable() {
                       <Checkbox checked={element.active}/>
                     </TableCell>
                     <TableCell className="text-center">
-                      <button className="bg-red-600 text-white font-semibold p-2 rounded-md">Delete</button>
+                      <Dialog>
+                        <DialogTrigger className="bg-red-600 text-white font-semibold p-2 rounded-md">
+                          Delete
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Are sure you want to delete payer {element.payer_name}?</DialogTitle>
+                            <DialogDescription>
+                              This action cannot be undone. This will permanently delete payer and all their data.
+                            </DialogDescription>
+                          </DialogHeader>
+                          <DialogFooter>
+                            <DialogClose asChild>
+                              <Button type="button" variant="secondary">Close</Button>
+                            </DialogClose>
+                            <DialogClose asChild>
+                              <Button type="button" onClick={() => payerDelete(element.id)}>Delete</Button>
+                            </DialogClose>
+                          </DialogFooter>
+                        </DialogContent>
+                      </Dialog>
                     </TableCell>
                   </TableRow>
               )) :
               <TableRow>
-                <TableCell colSpan={4} className="font-medium text-center">No data</TableCell>
+                <TableCell colSpan={5} className="font-medium text-center">No data</TableCell>
               </TableRow>
           }
         </TableBody>

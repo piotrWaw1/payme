@@ -12,6 +12,7 @@ export default function usePayersForm() {
     const toSend = {...values, payment_time: parseInt(values.payment_time)}
     const {error} = await supabaseClient.from('payers').insert(toSend)
     setPayersError(error)
+    console.log(error)
     setPayersLoading(false)
   }
 
