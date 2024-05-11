@@ -1,42 +1,35 @@
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
+import usePayers from "@/hooks/usePayers.tsx";
 
 
-const historyData = [{
-  id: 1,
-  payer_name: "Roman",
-  active: true,
-},
-  {
-    id: 2,
-    payer_name: "Tomek",
-    active: false,
-  },
-  {
-    id: 3,
-    payer_name: "Piotrek",
-    active: true,
-  }
-]
+export default function PayersTable() {
 
-export default function PayersTable(){
-  return(
+  const {payersData} = usePayers()
+
+  return (
       <Table className="border-2 ">
         <TableCaption>A list of all payers</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">#</TableHead>
             <TableHead className="text-center">Payer name</TableHead>
+            <TableHead className="text-center">Payment time</TableHead>
             <TableHead className="text-center">Active</TableHead>
+            <TableHead className="text-center"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {historyData?.length !== 0 ? historyData?.map(element => (
+          {payersData?.length !== 0 ? payersData?.map(element => (
                   <TableRow key={element.id}>
                     <TableCell className="font-medium">{element.id}</TableCell>
                     <TableCell className="text-center">{element.payer_name}</TableCell>
+                    <TableCell className="text-center">{element.payment_time}</TableCell>
                     <TableCell className="text-center pl-1">
                       <Checkbox checked={element.active}/>
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <button className="bg-red-600 text-white font-semibold p-2 rounded-md">Delete</button>
                     </TableCell>
                   </TableRow>
               )) :

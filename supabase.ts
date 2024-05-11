@@ -15,7 +15,7 @@ export type Database = {
           description: string | null
           id: number
           payer_name: string
-          payment_type: number
+          payment_time: number
           user_id: string
         }
         Insert: {
@@ -23,7 +23,7 @@ export type Database = {
           description?: string | null
           id?: number
           payer_name?: string
-          payment_type: number
+          payment_time: number
           user_id?: string
         }
         Update: {
@@ -31,17 +31,10 @@ export type Database = {
           description?: string | null
           id?: number
           payer_name?: string
-          payment_type?: number
+          payment_time?: number
           user_id?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "payers_payment_type_fkey"
-            columns: ["payment_type"]
-            isOneToOne: false
-            referencedRelation: "terms_of_payments"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "payers_user_id_fkey"
             columns: ["user_id"]
@@ -74,6 +67,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "payments_history_payer_id_fkey"
+            columns: ["payer_id"]
+            isOneToOne: false
+            referencedRelation: "payers"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "payments_history_user_id_fkey"
             columns: ["user_id"]

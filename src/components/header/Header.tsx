@@ -16,8 +16,8 @@ export default function Header() {
             <Link to='/payment'>
               <p className="text-lg mx-5 ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Add payment</p>
             </Link>
-            <Link to='/payer'>
-              <p className="text-lg ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Add payer</p>
+            <Link to='/payers'>
+              <p className="text-lg ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Payers</p>
             </Link>
           </div>
           <AvatarComponent/>
