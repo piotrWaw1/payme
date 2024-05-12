@@ -12,7 +12,6 @@ export default function usePayers() {
   const getPayers = useCallback(async () => {
     setPayersLoading(true)
     const {data, error} = await supabaseClient.from('payers').select()
-    console.log(data)
     setPayersData(data)
     setPayersError(error)
     setPayersLoading(false)

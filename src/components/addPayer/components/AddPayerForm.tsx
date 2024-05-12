@@ -14,7 +14,6 @@ export default function AddPayerForm() {
     resolver: zodResolver(payersSchema),
     defaultValues: {
       payer_name: "",
-      payment_time: "",
       description: ""
     }
   })
@@ -22,8 +21,6 @@ export default function AddPayerForm() {
   const resetValues = () => {
     form.reset()
   }
-
-
 
   return (
       <div className="flex justify-center">

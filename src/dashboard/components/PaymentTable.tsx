@@ -7,30 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-// import useHistory from "@/hooks/useHistory.tsx";
+import useHistory from "@/hooks/useHistory.tsx";
 
 export default function PaymentTable() {
-  // const {historyData} = useHistory()
-
-  const historyData = [{
-    id: 1,
-    payers: {payer_name: "Name"},
-    date: "2000-10-10",
-    price: "20"
-  },
-    {
-      id: 2,
-      payers: {payer_name: "Name"},
-      date: "2000-10-10",
-      price: "20"
-    },
-    {
-      id: 3,
-      payers: {payer_name: "Name"},
-      date: "2000-10-10",
-      price: "20"
-    }
-  ]
+  const {historyData} = useHistory()
 
   return (
       <Table className="border-2 ">
@@ -47,7 +27,7 @@ export default function PaymentTable() {
           {historyData?.length !== 0 ? historyData?.map(element => (
                   <TableRow key={element.id}>
                     <TableCell className="font-medium">{element.id}</TableCell>
-                    <TableCell className="text-center">{element.payers.payer_name}</TableCell>
+                    <TableCell className="text-center">{element.payers?.payer_name}</TableCell>
                     <TableCell className="text-center">{element.date}</TableCell>
                     <TableCell className="text-right">{element.price} PLN</TableCell>
                   </TableRow>
