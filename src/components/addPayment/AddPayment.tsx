@@ -13,7 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import {CalendarIcon} from "lucide-react";
+import {CalendarIcon, Loader2} from "lucide-react";
 import {format} from "date-fns";
 import {cn} from "@/lib/utils.ts";
 import useAddPayment from "@/hooks/useAddPayment.tsx";
@@ -22,7 +22,7 @@ import useAddPayment from "@/hooks/useAddPayment.tsx";
 export default function AddPayment() {
 
   const {payersData} = usePayers()
-  const {sendForm} = useAddPayment()
+  const {sendForm, paymentLoading} = useAddPayment()
   const form = useForm<PaymentSchema>({
     resolver: zodResolver(paymentSchema),
     defaultValues: {
@@ -48,7 +48,7 @@ export default function AddPayment() {
                       <FormItem>
                         <FormLabel>Price</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="0.00" {...field} />
+                          <Input disabled={paymentLoading} type="number" placeholder="0.00" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
@@ -59,7 +59,7 @@ export default function AddPayment() {
                   render={({field}) => (
                       <FormItem>
                         <FormLabel>Payer</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select disabled={paymentLoading} onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="w-[180px]">
                               <SelectValue placeholder="Select payer"/>
@@ -81,10 +81,11 @@ export default function AddPayment() {
                   render={({field}) => (
                       <FormItem className="flex flex-col">
                         <FormLabel>Date</FormLabel>
-                        <Popover>
+                        <Popover >
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button
+                                  disabled={paymentLoading}
                                   variant={"outline"}
                                   className={cn(
                                       "w-[240px] pl-3 text-left font-normal",
@@ -113,10 +114,11 @@ export default function AddPayment() {
                       </FormItem>
                   )}
               />
-              <Button type="submit" className="mr-3 mt-3">
+              <Button disabled={paymentLoading} type="submit" className="mr-3 mt-3">
+                {paymentLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
                 Submit
               </Button>
-              <Button type="reset" onClick={resetValues}>
+              <Button disabled={paymentLoading} type="reset" onClick={resetValues}>
                 Reset
               </Button>
             </form>

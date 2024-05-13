@@ -6,9 +6,11 @@ import {Input} from "@/components/ui/input.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import usePayersForm from "@/hooks/usePayersForm.tsx";
+import {Loader2} from "lucide-react";
 
 export default function AddPayerForm() {
-  const {sendForm} = usePayersForm()
+  const {sendForm, payersError, payersLoading} = usePayersForm()
+
 
   const form = useForm<AddPayerData>({
     resolver: zodResolver(payersSchema),
@@ -26,6 +28,7 @@ export default function AddPayerForm() {
       <div className="flex justify-center">
         <div className="w-96">
           <h2 className="text-3xl font-bold mb-3">Add new payer</h2>
+          <p className="text-red-500 font-bold">{payersError}</p>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(sendForm)}>
               <FormField
@@ -35,7 +38,7 @@ export default function AddPayerForm() {
                       <FormItem>
                         <FormLabel>Payer name</FormLabel>
                         <FormControl>
-                          <Input placeholder="John Doe" {...field} />
+                          <Input disabled={payersLoading} placeholder="John Doe" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
@@ -46,7 +49,7 @@ export default function AddPayerForm() {
                   render={({field}) => (
                       <FormItem>
                         <FormLabel>Payment type</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select disabled={payersLoading} onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="w-[180px]">
                               <SelectValue placeholder="Select payment type"/>
@@ -58,6 +61,7 @@ export default function AddPayerForm() {
                             <SelectItem value="6">6 months</SelectItem>
                           </SelectContent>
                         </Select>
+                        <FormMessage/>
                       </FormItem>
                   )}
               />
@@ -68,16 +72,17 @@ export default function AddPayerForm() {
                       <FormItem>
                         <FormLabel>Description</FormLabel>
                         <FormControl>
-                          <Input placeholder="Some info" {...field} />
+                          <Input disabled={payersLoading} placeholder="Some info" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
                   )}
               />
-              <Button type="submit" className="mr-3 mt-3">
+              <Button type="submit" disabled={payersLoading} className="mr-3 mt-3">
+                {payersLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
                 Submit
               </Button>
-              <Button type="reset" onClick={resetValues}>
+              <Button type="reset" disabled={payersLoading} onClick={resetValues}>
                 Reset
               </Button>
             </form>

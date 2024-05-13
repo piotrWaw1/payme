@@ -8,7 +8,6 @@ export default function usePayers() {
   const [payersData, setPayersData] = useState<Tables<'payers'>[] | null>(null)
   const [payersError, setPayersError] = useState<PostgrestError | null>(null)
 
-
   const getPayers = useCallback(async () => {
     setPayersLoading(true)
     const {data, error} = await supabaseClient.from('payers').select()

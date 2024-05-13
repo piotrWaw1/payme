@@ -64,6 +64,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <SessionProvider>
         <RouterProvider router={router}/>
+
       </SessionProvider>
     </React.StrictMode>,
 )
