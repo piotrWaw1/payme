@@ -14,6 +14,7 @@ import './index.css'
 import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
 import Payer from "@/components/payer/Payer.tsx";
 import Payments from "@/components/payments/Payments.tsx";
+import AddPayment from "@/components/payments/AddPayment.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/payments',
         element: <Payments/>
+      },
+      {
+        path: '/payments/add',
+        element: <AddPayment/>
       },
       {
         path: '/payers',
