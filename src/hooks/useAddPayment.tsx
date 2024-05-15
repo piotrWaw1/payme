@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
-import {PaymentSchema} from "@/components/addPayment/PaymentSchema.ts";
+import {PaymentSchema} from "@/components/payments/PaymentSchema.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
 

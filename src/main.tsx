@@ -9,10 +9,11 @@ import PrivateRoute from "@/utils/PrivateRoute.tsx";
 import PublicRoute from "@/utils/PublicRoute.tsx";
 import {SessionProvider} from "@/context/SessionContext.tsx";
 import Dashboard from "@/dashboard/Dashboard.tsx";
-import AddPayment from "@/components/addPayment/AddPayment.tsx";
-import Payers from "@/components/addPayer/Payers.tsx";
+import Payers from "@/components/payer/Payers.tsx";
 import './index.css'
-import AddPayerForm from "@/components/addPayer/components/AddPayerForm.tsx";
+import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
+import Payer from "@/components/payer/Payer.tsx";
+import Payments from "@/components/payments/Payments.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,8 @@ const router = createBrowserRouter([
         element: <Dashboard/>
       },
       {
-        path: '/payment',
-        element: <AddPayment/>
+        path: '/payments',
+        element: <Payments/>
       },
       {
         path: '/payers',
@@ -37,7 +38,12 @@ const router = createBrowserRouter([
       {
         path: '/payers/add',
         element: <AddPayerForm/>
-      }
+      },
+      {
+        path: '/payers/:id',
+        element: <Payer/>
+      },
+
     ]
   },
   {

@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {AddPayerData, payersSchema} from "@/components/addPayer/PayersSchema.ts";
+import {AddPayerData, payersSchema} from "@/components/payer/addPayer/PayersSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form.tsx";
 import {Input} from "@/components/ui/input.tsx";

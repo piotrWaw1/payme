@@ -13,8 +13,8 @@ export default function Header() {
             <Link to='/'>
               <p className="text-lg ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Home</p>
             </Link>
-            <Link to='/payment'>
-              <p className="text-lg mx-5 ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Add payment</p>
+            <Link to='/payments'>
+              <p className="text-lg mx-5 ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Payments</p>
             </Link>
             <Link to='/payers'>
               <p className="text-lg ease-in-out duration-200 hover:text-xl hover:underline hover:font-semibold">Payers</p>

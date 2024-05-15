@@ -22,8 +22,6 @@ const useHistory = () => {
       const {data, error} = await supabaseClient
           .from('payments_history')
           .select('id, user_id, price, date, payers (payer_name)')
-      // console.log(data)
-      // console.log(error)
       setHistoryData(data)
       setHistoryError(error)
       setHistoryLoading(false)

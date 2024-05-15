@@ -4,7 +4,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Button} from "@/components/ui/button.tsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {paymentSchema, PaymentSchema} from "@/components/addPayment/PaymentSchema.ts";
+import {paymentSchema, PaymentSchema} from "@/components/payments/PaymentSchema.ts";
 import usePayers from "@/hooks/usePayers.tsx";
 
 import {Calendar} from "@/components/ui/calendar"

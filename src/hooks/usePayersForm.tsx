@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {AddPayerData} from "@/components/addPayer/PayersSchema.ts";
+import {AddPayerData} from "@/components/payer/addPayer/PayersSchema.ts";
 import {supabaseClient} from "@/clientDef.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
