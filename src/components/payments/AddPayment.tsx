@@ -21,7 +21,7 @@ import useAddPayment from "@/hooks/useAddPayment.tsx";
 
 export default function AddPayment() {
 
-  const {payersData} = usePayers()
+  const {payersData} = usePayers("active")
   const {sendForm, paymentLoading} = useAddPayment()
   const form = useForm<PaymentSchema>({
     resolver: zodResolver(paymentSchema),
@@ -33,8 +33,6 @@ export default function AddPayment() {
   const resetValues = () => {
     form.reset()
   }
-
-
   return (
       <div className="flex justify-center">
         <div className="w-96">
@@ -69,6 +67,9 @@ export default function AddPayment() {
                             {payersData?.map(element => (
                                 <SelectItem value={`${element.id}`} key={element.id}>{element.payer_name}</SelectItem>
                             ))}
+                            {payersData?.length === 0  &&
+                                <SelectItem disabled value="0">No data</SelectItem>
+                            }
                           </SelectContent>
                         </Select>
                         <FormMessage/>
@@ -81,7 +82,7 @@ export default function AddPayment() {
                   render={({field}) => (
                       <FormItem className="flex flex-col">
                         <FormLabel>Date</FormLabel>
-                        <Popover >
+                        <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
                               <Button

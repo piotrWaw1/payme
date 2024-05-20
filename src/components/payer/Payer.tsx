@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog.tsx";
-import EditPayerForm from "@/components/payer/edit/payer/EditPayerForm.tsx";
+import EditPayerForm from "@/components/payer/edit/EditPayerForm.tsx";
 import {Loader2} from "lucide-react";
 
 export default function Payer() {

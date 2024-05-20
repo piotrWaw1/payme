@@ -10,25 +10,12 @@ import {
 import {Link} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
 import useHistory from "@/hooks/useHistory.tsx";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog.tsx";
-import {supabaseClient} from "@/clientDef.ts";
+import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
+import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
+import DeleteButton from "@/components/util/DeleteButton.tsx";
 
 export default function Payments() {
-  const {historyData} = useHistory()
-
-  const paymentDelete = async (id: number) => {
-    const {error} = await supabaseClient.from('payments_history').delete().eq('id', id)
-    console.log(error)
-  }
+  const {getHistory, historyData, historyLoading} = useHistory()
   return (
       <>
         <div className="flex justify-between">
@@ -50,39 +37,30 @@ export default function Payments() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {historyData?.map(element=>(
+            {!historyLoading && historyData?.map(element => (
                 <TableRow key={element.id}>
                   <TableCell className="font-medium">{element.id}</TableCell>
                   <TableCell className="text-center">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{element.date}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
                   <TableCell className="text-center">
-                    <Button>Edit</Button>
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button className="ml-3 bg-red-600 text-white font-semibold p-2 rounded-md hover:bg-red-700">Delete</Button>
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Are sure you want to delete payment {element.date}?</DialogTitle>
-                          <DialogDescription>
-                            This action cannot be undone. This will permanently delete payer and all their data.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter>
-                          <DialogClose asChild>
-                            <Button type="button" variant="secondary">Close</Button>
-                          </DialogClose>
-                          <DialogClose asChild>
-                            <Button type="button" onClick={() => paymentDelete(element.id)}>Delete</Button>
-                          </DialogClose>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
-
+                    <Button className="mr-2">Edit</Button>
+                    <DeleteButton
+                        title={`Are you sure you want to delete ${element.date}?`}
+                        description={"This action cannot be undone. This will permanently delete payer and all their data"}
+                        elementId={`${element.id}`}
+                        table={"payments_history"}
+                        getNewData={getHistory}
+                    />
                   </TableCell>
                 </TableRow>
             ))}
+            {historyLoading &&
+                <TableLoadingComponent span={4}/>
+            }
+            {!historyLoading && historyData?.length === 0 &&
+                <NoDataTableRow span={4}/>
+            }
           </TableBody>
         </Table>
       </>

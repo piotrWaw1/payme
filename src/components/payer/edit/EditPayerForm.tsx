@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {EditPayerData, editPayerFormSchema} from "@/components/payer/edit/payer/editPayerFormSchema.ts";
+import {EditPayerData, editPayerFormSchema} from "@/components/payer/edit/editPayerFormSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form.tsx";
 import {Input} from "@/components/ui/input.tsx";
@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {DialogClose, DialogFooter} from "@/components/ui/dialog.tsx";
 import {FC} from "react";
-import {Tables} from "../../../../../supabase.ts";
+import {Tables} from "../../../../supabase.ts";
 
 interface EditPayerFormProps {
   payerData: Tables<"payers">;

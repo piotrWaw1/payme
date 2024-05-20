@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table"
 import useHistory from "@/hooks/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
+import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 
 export default function PaymentTable() {
   const {historyData, historyLoading} = useHistory()
@@ -38,9 +39,7 @@ export default function PaymentTable() {
           })
           }
           {!historyData?.length && !historyLoading &&
-              <TableRow>
-                  <TableCell colSpan={4} className="font-medium text-center">No data</TableCell>
-              </TableRow>
+              <NoDataTableRow span={4}/>
           }
           {historyLoading &&
               <TableLoadingComponent span={4}/>

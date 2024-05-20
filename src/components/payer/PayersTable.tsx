@@ -1,29 +1,16 @@
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import usePayers from "@/hooks/usePayers.tsx";
-import {
-  Dialog, DialogClose,
-  DialogContent,
-  DialogDescription, DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog.tsx"
 import {Button} from "@/components/ui/button.tsx";
-import {supabaseClient} from "@/clientDef.ts";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import {Link} from "react-router-dom";
+import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
+import DeleteButton from "@/components/util/DeleteButton.tsx";
 
 export default function PayersTable() {
 
-  const {getPayers, payersData, payersLoading} = usePayers()
-
-  const payerDelete = async (id: number) => {
-    const {error} = await supabaseClient.from('payers').delete().eq('id', id)
-    void getPayers()
-    console.log(error)
-  }
+  const {getPayers, payersData, payersLoading} = usePayers("all")
 
   return (
 
@@ -31,7 +18,7 @@ export default function PayersTable() {
         <TableCaption>A list of all payers</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">#</TableHead>
+            <TableHead className="w-[100px]">Id</TableHead>
             <TableHead className="text-center">Payer name</TableHead>
             <TableHead className="text-center">Payment time</TableHead>
             <TableHead className="text-center">Active</TableHead>
@@ -56,27 +43,13 @@ export default function PayersTable() {
                     <Link to={`${element.id}`}>
                       <Button type="button" className="mr-2">Info</Button>
                     </Link>
-                    <Dialog>
-                      <DialogTrigger className="bg-red-600 text-white font-semibold p-2 rounded-md">
-                        Delete
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Are sure you want to delete payer {element.payer_name}?</DialogTitle>
-                          <DialogDescription>
-                            This action cannot be undone. This will permanently delete payer and all their data.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter>
-                          <DialogClose asChild>
-                            <Button type="button" variant="secondary">Close</Button>
-                          </DialogClose>
-                          <DialogClose asChild>
-                            <Button type="button" onClick={() => payerDelete(element.id)}>Delete</Button>
-                          </DialogClose>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+                    <DeleteButton
+                        title={`Are you sure you want to delete ${element.payer_name}?`}
+                        description={"This action cannot be undone. This will permanently delete payer and all their data"}
+                        elementId={`${element.id}`}
+                        table={'payers'}
+                        getNewData={getPayers}
+                    />
                   </TableCell>
                 </TableRow>
                 <HoverCardContent>
@@ -86,9 +59,7 @@ export default function PayersTable() {
               </HoverCard>
           ))}
           {!payersData?.length && !payersLoading &&
-              <TableRow>
-                  <TableCell colSpan={5} className="font-medium text-center">No data</TableCell>
-              </TableRow>
+              <NoDataTableRow span={5}/>
           }
           {payersLoading &&
               <TableLoadingComponent span={5}/>
