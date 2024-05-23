@@ -57,7 +57,7 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, updatePayerData, paye
               render={({field}) => (
                   <FormItem>
                     <FormLabel>Payment type</FormLabel>
-                    <Select disabled={false} onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select disabled={false} value={`${field.value}`} onValueChange={field.onChange}>
                       <FormControl>
                         <SelectTrigger className="w-[180px]">
                           <SelectValue defaultValue='' placeholder="Select payment type"/>

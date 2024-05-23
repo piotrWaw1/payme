@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
-import {Tables} from "../../supabase.ts";
+import {Tables} from "../../../supabase.ts";
 import {PostgrestError} from "@supabase/supabase-js";
 
 type ActionType = "all"|"active"|"inactive"

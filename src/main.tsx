@@ -8,13 +8,14 @@ import AuthComponent from "@/components/AuthComponent.tsx";
 import PrivateRoute from "@/utils/PrivateRoute.tsx";
 import PublicRoute from "@/utils/PublicRoute.tsx";
 import {SessionProvider} from "@/context/SessionContext.tsx";
-import Dashboard from "@/dashboard/Dashboard.tsx";
+import Dashboard from "@/components/dashboard/Dashboard.tsx";
 import Payers from "@/components/payer/Payers.tsx";
 import './index.css'
 import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
 import Payer from "@/components/payer/Payer.tsx";
 import Payments from "@/components/payments/Payments.tsx";
 import AddPayment from "@/components/payments/AddPayment.tsx";
+import EditPayment from "@/components/payments/EditPayment.tsx";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/payments/add',
         element: <AddPayment/>
+      },
+      {
+        path: '/payments/:id',
+        element: <EditPayment/>
       },
       {
         path: '/payers',

@@ -1,6 +1,6 @@
 import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
-import usePayers from "@/hooks/usePayers.tsx";
+import usePayers from "@/hooks/payer/usePayers.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";

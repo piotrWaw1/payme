@@ -1,6 +1,6 @@
 import {useCallback, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
-import {Tables} from "../../supabase.ts";
+import {Tables} from "../../../supabase.ts";
 import {EditPayerData} from "@/components/payer/edit/editPayerFormSchema.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";

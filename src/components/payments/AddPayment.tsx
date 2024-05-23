@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {paymentSchema, PaymentSchema} from "@/components/payments/PaymentSchema.ts";
-import usePayers from "@/hooks/usePayers.tsx";
+import usePayers from "@/hooks/payer/usePayers.tsx";
 
 import {Calendar} from "@/components/ui/calendar"
 import {
@@ -16,7 +16,7 @@ import {
 import {CalendarIcon, Loader2} from "lucide-react";
 import {format} from "date-fns";
 import {cn} from "@/lib/utils.ts";
-import useAddPayment from "@/hooks/useAddPayment.tsx";
+import useAddPayment from "@/hooks/payment/useAddPayment.tsx";
 
 
 export default function AddPayment() {

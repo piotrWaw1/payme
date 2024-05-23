@@ -1,7 +1,7 @@
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useEffect} from "react";
-import usePayer from "@/hooks/usePayer.tsx";
+import usePayer from "@/hooks/payer/usePayer.tsx";
 import {useParams} from "react-router-dom";
 import {
   Dialog,

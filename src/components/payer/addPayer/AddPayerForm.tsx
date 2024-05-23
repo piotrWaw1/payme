@@ -5,7 +5,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input.tsx";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import usePayersForm from "@/hooks/usePayersForm.tsx";
+import usePayersForm from "@/hooks/payer/usePayersForm.tsx";
 import {Loader2} from "lucide-react";
 
 export default function AddPayerForm() {

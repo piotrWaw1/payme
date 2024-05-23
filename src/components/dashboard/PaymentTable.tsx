@@ -6,8 +6,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import useHistory from "@/hooks/useHistory.tsx";
+} from "@/components/ui/table.tsx"
+import useHistory from "@/hooks/payment/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 

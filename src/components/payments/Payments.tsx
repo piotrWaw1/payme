@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table"
 import {Link} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
-import useHistory from "@/hooks/useHistory.tsx";
+import useHistory from "@/hooks/payment/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import DeleteButton from "@/components/util/DeleteButton.tsx";
@@ -44,7 +44,9 @@ export default function Payments() {
                   <TableCell className="text-center">{element.date}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
                   <TableCell className="text-center">
-                    <Button className="mr-2">Edit</Button>
+                    <Link to={`${element.id}`}>
+                      <Button className="mr-2">Edit</Button>
+                    </Link>
                     <DeleteButton
                         title={`Are you sure you want to delete ${element.date}?`}
                         description={"This action cannot be undone. This will permanently delete payer and all their data"}
