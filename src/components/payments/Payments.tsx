@@ -13,9 +13,15 @@ import useHistory from "@/hooks/payment/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import DeleteButton from "@/components/util/DeleteButton.tsx";
+import {useEffect} from "react";
 
 export default function Payments() {
   const {getHistory, historyData, historyLoading} = useHistory()
+
+  useEffect(() => {
+    void getHistory()
+  }, [getHistory]);
+
   return (
       <>
         <div className="flex justify-between">

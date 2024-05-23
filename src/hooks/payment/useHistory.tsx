@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
 import {PostgrestError} from "@supabase/supabase-js";
 
@@ -27,11 +27,16 @@ const useHistory = () => {
     setHistoryLoading(false)
   }, [])
 
-  useEffect(() => {
-    void getHistory()
-  }, [getHistory]);
+  const getNewest = useCallback(async () => {
+    const {data, error} = await supabaseClient.from('payments_history')
+        .select('id, user_id, price, date, payers (payer_name)')
+        .order('date', {ascending: false})
+        .limit(10)
+    setHistoryError(error)
+    setHistoryData(data)
+  },[])
 
-  return {getHistory, historyLoading, historyData, historyError}
+  return {getHistory, getNewest, historyLoading, historyData, historyError}
 }
 
 export default useHistory

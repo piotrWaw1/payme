@@ -28,10 +28,10 @@ export default function Payer() {
       <div className="flex flex-col justify-center items-center">
         <div className="border p-3 rounded-2xl shadow-2xl	w-80">
           {payerLoading &&
-          <div className="flex items-center justify-center">
-            <span className="text-lg font-medium">Loading</span>
-            <Loader2 className="ml-2 animate-spin"/>
-          </div>
+              <div className="flex items-center justify-center">
+                  <span className="text-lg font-medium">Loading</span>
+                  <Loader2 className="ml-2 animate-spin"/>
+              </div>
           }
           {!payerLoading && payerData?.id &&
               <>

@@ -16,6 +16,7 @@ import Payer from "@/components/payer/Payer.tsx";
 import Payments from "@/components/payments/Payments.tsx";
 import AddPayment from "@/components/payments/AddPayment.tsx";
 import EditPayment from "@/components/payments/EditPayment.tsx";
+import Callback from "@/Callback.tsx";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       },
     ]
   },
+  {
+    path: '/callback',
+    element: <Callback/>
+  },
 ])
 
 
@@ -80,7 +85,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <SessionProvider>
         <RouterProvider router={router}/>
-
       </SessionProvider>
     </React.StrictMode>,
 )

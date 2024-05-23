@@ -10,10 +10,16 @@ import {
 import useHistory from "@/hooks/payment/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
+import {useEffect} from "react";
 
 export default function PaymentTable() {
-  const {historyData, historyLoading} = useHistory()
+  const {historyData, historyLoading, getNewest} = useHistory()
   let id = 0
+
+  useEffect(() => {
+    void getNewest()
+  }, [getNewest]);
+
   return (
       <Table className="border-2 ">
         <TableCaption>List of all payments for the current month</TableCaption>

@@ -16,6 +16,7 @@ import {Link} from "react-router-dom";
 import useLogIn from "@/hooks/useLogIn.tsx";
 import {formSchema, LogInData} from "@/components/auth/formSchema/logInSchema.ts";
 import {Loader2} from "lucide-react";
+import {supabaseClient} from "@/clientDef.ts";
 
 export default function Login() {
   const {logIn, isLoading, error} = useLogIn()
@@ -27,7 +28,16 @@ export default function Login() {
       password: ""
     },
   })
-  
+
+  const logWithGoogle = async () => {
+    await supabaseClient.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `http://localhost:5173/callback`,
+      },
+    })
+  }
+
   return (
       <div className="relative w-96 p-5 border-2 border-gray-300 bg-white rounded-2xl shadow-2xl">
         <h2 className="mb-4 text-3xl font-bold">Login</h2>
@@ -73,7 +83,7 @@ export default function Login() {
           <span className="font-bold flex-shrink mx-3 text-gray-700">OR CONTINUE WITH</span>
           <div className="flex-grow border-t border-b border-gray-400"></div>
         </div>
-        <Button
+        <Button onClick={logWithGoogle}
             className="bg-transparent text-black w-full py-3 mt-3 border border-black font-medium hover:text-white">
           <img className='w-7 h-7' src={google} alt="google"/>
           Google
