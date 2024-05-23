@@ -1,8 +1,6 @@
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {useEffect} from "react";
 import usePayer from "@/hooks/payer/usePayer.tsx";
-import {useParams} from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -15,14 +13,7 @@ import EditPayerForm from "@/components/payer/edit/EditPayerForm.tsx";
 import {Loader2} from "lucide-react";
 
 export default function Payer() {
-  const {id} = useParams()
-  const {getPayerData, payerData, updatePayerData, payerLoading} = usePayer()
-
-  useEffect(() => {
-    if (id) {
-      void getPayerData(id)
-    }
-  }, [getPayerData, id]);
+  const {getPayerData, payerData, payerLoading} = usePayer()
 
   return (
       <div className="flex flex-col justify-center items-center">
@@ -37,8 +28,10 @@ export default function Payer() {
               <>
                   <h2 className="text-3xl font-bold text-center border-b border-black p-2">{payerData?.payer_name}</h2>
                   <div className="border-b border-black pb-3">
-                      <p className="font-semibold flex gap-2 items-center mt-3 mb-1">Active: <Checkbox
-                          checked={payerData?.active}/></p>
+                      <p className="font-semibold flex gap-2 items-center mt-3 mb-1">
+                          Active:
+                          <Checkbox checked={payerData?.active}/>
+                      </p>
                       <span className="font-semibold">Payment time: <span
                           className="font-normal">{payerData?.payment_time} month</span></span>
                   </div>
@@ -61,8 +54,8 @@ export default function Payer() {
                             {payerData &&
                                 <EditPayerForm
                                     payerData={payerData}
-                                    updatePayerData={updatePayerData}
-                                    payerLoading={payerLoading}/>
+                                    getPayerData={getPayerData}
+                                />
                             }
                           </DialogContent>
                       </Dialog>

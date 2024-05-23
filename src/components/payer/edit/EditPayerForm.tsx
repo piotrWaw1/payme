@@ -9,14 +9,37 @@ import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {DialogClose, DialogFooter} from "@/components/ui/dialog.tsx";
 import {FC} from "react";
 import {Tables} from "../../../../supabase.ts";
+import {supabaseClient} from "@/clientDef.ts";
+import {ToastAction} from "@/components/ui/toast.tsx";
+import {useToast} from "@/components/ui/use-toast.ts";
+import {useParams} from "react-router-dom";
 
 interface EditPayerFormProps {
   payerData: Tables<"payers">;
-  updatePayerData: (formData: EditPayerData, id: string) => void;
-  payerLoading: boolean;
+  getPayerData: () => Promise<void>;
 }
 
-const EditPayerForm: FC<EditPayerFormProps> = ({payerData, updatePayerData, payerLoading}) => {
+const EditPayerForm: FC<EditPayerFormProps> = ({payerData, getPayerData}) => {
+  const {toast} = useToast()
+  const {id} = useParams<{ id: string }>()
+
+  const updatePayerData = async (formData: EditPayerData) => {
+    if (!id) {
+      return
+    }
+    const toSend = {...formData, payment_time: +formData?.payment_time}
+    const {error} = await supabaseClient.from('payers').update(toSend).eq('id', id)
+    if (!error)
+      toast(
+          {
+            variant: "default",
+            title: "Success",
+            description: "Payer edited successfully.",
+            action: <ToastAction altText="Try again">Close</ToastAction>,
+          }
+      )
+    await getPayerData()
+  }
 
   const form = useForm<EditPayerData>({
     resolver: zodResolver(editPayerFormSchema),
@@ -37,8 +60,12 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, updatePayerData, paye
 
   return (
       <Form {...form}>
-        <form className="grid gap-4 py-4"
-              onSubmit={form.handleSubmit((data) => updatePayerData(data, `${payerData.id}`))}>
+        <form
+            className="grid gap-4 py-4"
+            onSubmit={form.handleSubmit(updatePayerData)}
+        >
+
+          {/*<InputField label="Payer name" name="payer_name"/>*/}
           <FormField
               control={form.control}
               name="payer_name"
@@ -92,9 +119,10 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, updatePayerData, paye
               render={({field}) => (
                   <FormItem>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="terms"
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
+                      <Checkbox
+                          id="terms"
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
                       />
                       <label
                           htmlFor="terms"
@@ -111,7 +139,7 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, updatePayerData, paye
               <Button variant="outline">Close</Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button disabled={payerLoading} type="submit">
+              <Button disabled={form.formState.isSubmitting} type="submit">
                 Save changes
               </Button>
             </DialogClose>
