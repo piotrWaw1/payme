@@ -33,7 +33,7 @@ export default function Login() {
     await supabaseClient.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `/callback`,
+        redirectTo: `https://payme-wfdv.onrender.com/callback`,
       },
     })
   }
