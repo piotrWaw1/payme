@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     path: '/',
     element:
         <PrivateRoute>
-          <App/>
+          <App/>,
         </PrivateRoute>,
     children: [
       {
@@ -61,8 +61,8 @@ const router = createBrowserRouter([
     path: '/',
     element:
         <PublicRoute>
-          <AuthComponent/>
-        </PublicRoute>,
+          <AuthComponent/>,
+       </PublicRoute>,
     children: [
       {
         path: '/login',

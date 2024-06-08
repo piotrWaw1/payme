@@ -36,17 +36,16 @@ export default function Payments() {
           <TableCaption>A list of your recent invoices.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Id</TableHead>
-              <TableHead className="text-center">Payer name</TableHead>
+              <TableHead className="text-start">Payer name</TableHead>
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Price</TableHead>
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {!historyLoading && historyData?.map(element => (
                 <TableRow key={element.id}>
-                  <TableCell className="font-medium">{element.id}</TableCell>
-                  <TableCell className="text-center">{element.payers?.payer_name}</TableCell>
+                  <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{element.date}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
                   <TableCell className="text-center">

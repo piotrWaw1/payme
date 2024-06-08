@@ -1,4 +1,3 @@
-import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import usePayer from "@/hooks/payer/usePayer.tsx";
 import {
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/dialog.tsx";
 import EditPayerForm from "@/components/payer/edit/EditPayerForm.tsx";
 import {Loader2} from "lucide-react";
+import ActiveInactive from "@/components/payer/util/ActiveInactive.tsx";
 
 export default function Payer() {
   const {getPayerData, payerData, payerLoading} = usePayer()
@@ -30,7 +30,7 @@ export default function Payer() {
                   <div className="border-b border-black pb-3">
                       <p className="font-semibold flex gap-2 items-center mt-3 mb-1">
                           Active:
-                          <Checkbox checked={payerData?.active}/>
+                        <ActiveInactive active={payerData.active}/>
                       </p>
                       <span className="font-semibold">Payment time: <span
                           className="font-normal">{payerData?.payment_time} month</span></span>

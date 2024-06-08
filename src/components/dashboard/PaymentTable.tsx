@@ -14,7 +14,6 @@ import {useEffect} from "react";
 
 export default function PaymentTable() {
   const {historyData, historyLoading, getNewest} = useHistory()
-  let id = 0
 
   useEffect(() => {
     void getNewest()
@@ -22,22 +21,19 @@ export default function PaymentTable() {
 
   return (
       <Table className="border-2 ">
-        <TableCaption>List of all payments for the current month</TableCaption>
+        <TableCaption>List of 10 latest payments</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Id</TableHead>
-            <TableHead className="text-center">Payer</TableHead>
+            <TableHead className="text-start">Payer</TableHead>
             <TableHead className="text-center">Date</TableHead>
             <TableHead className="text-right">Price</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {historyData?.length !== 0 && historyData?.map(element => {
-            id += 1
             return (
                 <TableRow key={element.id}>
-                  <TableCell className="font-medium">{id}</TableCell>
-                  <TableCell className="text-center">{element.payers?.payer_name}</TableCell>
+                  <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{element.date}</TableCell>
                   <TableCell className="text-right">{element.price} PLN</TableCell>
                 </TableRow>

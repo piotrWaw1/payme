@@ -32,8 +32,10 @@ const DeleteButton: FC<DeleteDialogProps> = (props) => {
 
   return (
       <Dialog>
-        <DialogTrigger className="bg-red-600 text-white font-semibold p-2 rounded-md hover:bg-red-500">
-          Delete
+        <DialogTrigger >
+          <Button variant="destructive">
+            Delete
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
