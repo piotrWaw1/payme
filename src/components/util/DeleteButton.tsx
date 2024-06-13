@@ -32,7 +32,7 @@ const DeleteButton: FC<DeleteDialogProps> = (props) => {
 
   return (
       <Dialog>
-        <DialogTrigger >
+        <DialogTrigger asChild>
           <Button variant="destructive">
             Delete
           </Button>

@@ -14,7 +14,7 @@ import {useEffect} from "react";
 
 export default function PaymentTable() {
   const {historyData, historyLoading, getNewest} = useHistory()
-
+  const {data} = historyData
   useEffect(() => {
     void getNewest()
   }, [getNewest]);
@@ -30,7 +30,7 @@ export default function PaymentTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {historyData?.length !== 0 && historyData?.map(element => {
+          {historyData?.data?.length !== 0 && data?.map(element => {
             return (
                 <TableRow key={element.id}>
                   <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
@@ -40,7 +40,7 @@ export default function PaymentTable() {
             )
           })
           }
-          {!historyData?.length && !historyLoading &&
+          {!data?.length && !historyLoading &&
               <NoDataTableRow span={4}/>
           }
           {historyLoading &&

@@ -17,6 +17,7 @@ import Payments from "@/components/payments/Payments.tsx";
 import AddPayment from "@/components/payments/AddPayment.tsx";
 import EditPayment from "@/components/payments/EditPayment.tsx";
 import Callback from "@/Callback.tsx";
+import {ParamProvider} from "@/context/ParamContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/payments',
-        element: <Payments/>
+        element:
+            <ParamProvider>
+              <Payments/>
+            </ParamProvider>
       },
       {
         path: '/payments/add',
@@ -44,7 +48,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/payers',
-        element: <Payers/>
+        element:
+            <ParamProvider>
+              <Payers/>
+            </ParamProvider>
       },
       {
         path: '/payers/add',
@@ -62,7 +69,7 @@ const router = createBrowserRouter([
     element:
         <PublicRoute>
           <AuthComponent/>,
-       </PublicRoute>,
+        </PublicRoute>,
     children: [
       {
         path: '/login',

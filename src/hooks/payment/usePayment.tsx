@@ -67,7 +67,7 @@ export default function usePayment(id: string | undefined) {
     }
     void getPayment()
 
-  }, [id]);
+  }, [id, toast]);
 
   return {paymentLoad, paymentData, updatePayment}
 }

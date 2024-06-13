@@ -14,10 +14,11 @@ import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import DeleteButton from "@/components/util/DeleteButton.tsx";
 import {useEffect} from "react";
+import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
 
 export default function Payments() {
   const {getHistory, historyData, historyLoading} = useHistory()
-
+  const {data, count} = historyData
   useEffect(() => {
     void getHistory()
   }, [getHistory]);
@@ -43,7 +44,7 @@ export default function Payments() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {!historyLoading && historyData?.map(element => (
+            {!historyLoading && data?.map(element => (
                 <TableRow key={element.id}>
                   <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{element.date}</TableCell>
@@ -65,11 +66,14 @@ export default function Payments() {
             {historyLoading &&
                 <TableLoadingComponent span={4}/>
             }
-            {!historyLoading && historyData?.length === 0 &&
+            {!historyLoading && data?.length === 0 &&
                 <NoDataTableRow span={4}/>
             }
           </TableBody>
         </Table>
+        {!!historyData?.count &&
+            <PaginationUtil count={count} maxDisplay={10}/>
+        }
       </>
   )
 }
