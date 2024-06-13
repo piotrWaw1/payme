@@ -4,6 +4,8 @@ import {Tables} from "../../../supabase.ts";
 import {PaymentSchema} from "@/components/payments/PaymentSchema.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
+import {format} from "date-fns";
+
 
 export default function usePayment(id: string | undefined) {
   const [paymentLoad, stePaymentLoad] = useState(false)
@@ -14,11 +16,14 @@ export default function usePayment(id: string | undefined) {
   ])
   const {toast} = useToast()
   const updatePayment = async (data: PaymentSchema) => {
+
     const toSend = {
       price: parseFloat(data.price),
       payer_id: parseInt(data.payer_id),
-      date: JSON.stringify(data.date)
+      date: format(new Date(data.date), 'yyyy-MM-dd')
     }
+
+
     if (id) {
       const {error} = await supabaseClient.from("payments_history").update(toSend).eq('id', id)
       if (error) {
@@ -35,7 +40,7 @@ export default function usePayment(id: string | undefined) {
             {
               variant: "default",
               title: "Success",
-              description: "Payment added successfully",
+              description: "Payment edited successfully",
               action: <ToastAction altText="Try again">Close</ToastAction>,
             }
         )
@@ -50,7 +55,7 @@ export default function usePayment(id: string | undefined) {
         const {data} = await supabaseClient.from("payments_history").select().eq('id', id)
         if (data) {
           setPaymentData(data)
-          if(data.length === 0){
+          if (data.length === 0) {
             toast(
                 {
                   variant: "destructive",

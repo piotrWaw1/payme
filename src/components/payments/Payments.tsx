@@ -15,6 +15,7 @@ import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import DeleteButton from "@/components/util/DeleteButton.tsx";
 import {useEffect} from "react";
 import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
+import dateFormat from "@/components/util/tableDateFormat.ts";
 
 export default function Payments() {
   const {getHistory, historyData, historyLoading} = useHistory()
@@ -47,7 +48,7 @@ export default function Payments() {
             {!historyLoading && data?.map(element => (
                 <TableRow key={element.id}>
                   <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
-                  <TableCell className="text-center">{element.date}</TableCell>
+                  <TableCell className="text-center">{dateFormat(element.date)}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
                   <TableCell className="text-center">
                     <Link to={`${element.id}`}>

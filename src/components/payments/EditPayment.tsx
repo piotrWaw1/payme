@@ -33,6 +33,8 @@ export default function EditPayment() {
       payer_id: `${paymentData[0]?.payer_id}`
     }
   })
+
+  const {data} = payersData
   const resetValues = () => {
     form.reset()
   }
@@ -43,7 +45,9 @@ export default function EditPayment() {
           <h2 className="text-3xl font-bold mb-3">Edit payment</h2>
           {paymentData.length !== 0 &&
               <Form {...form}>
-                  <form onSubmit={form.handleSubmit(updatePayment)}>
+                  <form
+                      onSubmit={form.handleSubmit(updatePayment)}
+                  >
                       <FormField
                           control={form.control}
                           name="price"
@@ -69,12 +73,12 @@ export default function EditPayment() {
                                     </SelectTrigger>
                                   </FormControl>
                                   <SelectContent>
-                                    {payersData?.map(element => (
+                                    {data?.map(element => (
                                         <SelectItem value={`${element.id}`} key={element.id}>
                                           {element.payer_name}
                                         </SelectItem>
                                     ))}
-                                    {payersData?.length === 0 &&
+                                    {data?.length === 0 &&
                                         <SelectItem disabled value="0">No data</SelectItem>
                                     }
                                   </SelectContent>

@@ -3,6 +3,7 @@ import {supabaseClient} from "@/clientDef.ts";
 import {PaymentSchema} from "@/components/payments/PaymentSchema.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
+import {format} from "date-fns";
 
 export default function useAddPayment() {
   const [paymentLoading, setPaymentLoading] = useState(false)
@@ -14,10 +15,12 @@ export default function useAddPayment() {
     const toSend = {
       price: parseFloat(data.price),
       payer_id: parseInt(data.payer_id),
-      date: JSON.stringify(data.date)
+      date: format(new Date(data.date), 'yyyy-MM-dd')
     }
+
     const {error} = await supabaseClient.from('payments_history').insert(toSend)
     if(error){
+      console.log(error)
       toast(
           {
             variant: "destructive",

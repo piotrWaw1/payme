@@ -30,6 +30,9 @@ export default function AddPayment() {
       payer_id: ""
     }
   })
+
+  const {data} = payersData
+
   const resetValues = () => {
     form.reset()
   }
@@ -64,10 +67,10 @@ export default function AddPayment() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {payersData?.map(element => (
+                            {data?.map(element => (
                                 <SelectItem value={`${element.id}`} key={element.id}>{element.payer_name}</SelectItem>
                             ))}
-                            {payersData?.length === 0  &&
+                            {data?.length === 0  &&
                                 <SelectItem disabled value="0">No data</SelectItem>
                             }
                           </SelectContent>
