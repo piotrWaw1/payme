@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     path: '/',
     element:
         <PrivateRoute>
-          <App/>,
+          <App/>
         </PrivateRoute>,
     children: [
       {
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
     path: '/',
     element:
         <PublicRoute>
-          <AuthComponent/>,
+          <AuthComponent/>
         </PublicRoute>,
     children: [
       {
@@ -93,5 +93,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <SessionProvider>
         <RouterProvider router={router}/>
       </SessionProvider>
-    </React.StrictMode>,
+    </React.StrictMode>
 )
