@@ -35,7 +35,7 @@ const PaginationUtil: FC<PaginationUtilProps> = ({count, maxDisplay}) => {
   }
 
   return (
-      <Pagination className="mt-5">
+      <Pagination className="pb-32 block">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

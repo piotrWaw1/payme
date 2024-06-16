@@ -18,6 +18,7 @@ import AddPayment from "@/components/payments/AddPayment.tsx";
 import EditPayment from "@/components/payments/EditPayment.tsx";
 import Callback from "@/Callback.tsx";
 import {ParamProvider} from "@/context/ParamContext.tsx";
+import {TableFiltersProvider} from "@/context/TableFiltersContext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,9 @@ const router = createBrowserRouter([
         path: '/payers',
         element:
             <ParamProvider>
-              <Payers/>
+              <TableFiltersProvider>
+                <Payers/>
+              </TableFiltersProvider>
             </ParamProvider>
       },
       {

@@ -7,7 +7,7 @@ import {ParamContext} from "@/context/ParamContext.tsx";
 type ActionType = "all" | "active" | "inactive"
 
 interface PayersData {
-  count: number | null;
+  count: number;
   data: Tables<'payers'>[] | null;
 }
 
@@ -31,7 +31,7 @@ export default function usePayers(actionType: ActionType) {
               count: 'exact'
             }).range(startData, endData - 1)
 
-    setPayersData({count, data})
+    setPayersData({count: count ? count : 0, data})
     setPayersError(error)
     setPayersLoading(false)
   }, [maxData, page])

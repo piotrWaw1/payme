@@ -1,4 +1,4 @@
-import PayersTable from "@/components/payer/PayersTable.tsx";
+import PayersTable from "@/components/payer/table/PayersTable.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Link} from "react-router-dom";
 
