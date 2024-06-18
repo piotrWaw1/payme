@@ -12,7 +12,7 @@ import {Button} from "@/components/ui/button.tsx";
 import {supabaseClient} from "@/clientDef.ts";
 import {FC} from "react";
 
-type AllowedTabs = "payers" | "payments_history" | "terms_of_payments";
+type AllowedTabs = "payers" | "payments_history";
 
 interface DeleteDialogProps {
   title: string;

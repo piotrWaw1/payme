@@ -84,7 +84,7 @@ export default function Login() {
           <div className="flex-grow border-t border-b border-gray-400"></div>
         </div>
         <Button onClick={logWithGoogle}
-            className="bg-transparent text-black w-full py-3 mt-3 border border-black font-medium hover:text-white">
+                className="bg-transparent text-black w-full py-3 mt-3 border border-black font-medium hover:text-white">
           <img className='w-7 h-7' src={google} alt="google"/>
           Google
         </Button>
