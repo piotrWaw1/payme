@@ -14,6 +14,7 @@ interface PayersFiltersContextData {
   tableData: TableData;
   loading: boolean;
   getPayersData: (table: TableType) => void;
+  filterName: () => void
 }
 
 const DEFAULT_DATA = {
@@ -24,14 +25,15 @@ const DEFAULT_DATA = {
 export const TableFiltersContext = createContext<PayersFiltersContextData>({
   tableData: DEFAULT_DATA,
   loading: false,
-  getPayersData: () => undefined
+  getPayersData: () => undefined,
+  filterName: ()=>undefined
 })
 
 export const TableFiltersProvider: FC<{ children: ReactNode }> = ({children}) => {
   const [tableData, setTableData] = useState<TableData>(DEFAULT_DATA)
   const [loading, setLoading] = useState(false)
-  const {page, maxData, active, time} = useContext(ParamContext)
-  
+  const {page, maxData, active, time, name} = useContext(ParamContext)
+
   const getPayersData = useCallback(async (table: TableType) => {
     setLoading(true)
 
@@ -41,29 +43,35 @@ export const TableFiltersProvider: FC<{ children: ReactNode }> = ({children}) =>
     let query = supabaseClient.from(table)
         .select('*', {count: 'exact'})
         .range(startData, endData)
-    if(active !== 'all'){
+    if (active !== 'all') {
       query = query.eq('active', active)
     }
-    if(time !== 'all'){
+    if (time !== 'all') {
       query = query.eq('payment_time', time)
     }
-
     const {data, count} = await query
     // const {data, count} = await supabaseClient.from(table)
     //     .select('*', {count: 'exact'})
     //     .range(startData, endData)
 
-
-
     setTableData({data, count: count || 0})
     setLoading(false)
   }, [active, maxData, page, time])
 
+  const filterName = useCallback(async () => {
+    setLoading(true)
+    const {data, count} = await supabaseClient.from('payers')
+        .select('*', {count: "exact"})
+        .filter('payer_name', 'ilike', `%${name}%`)
+    setTableData({data, count: count || 0})
+    setLoading(false)
+  }, [name])
 
   const contextData = {
     tableData,
     loading,
-    getPayersData
+    getPayersData,
+    filterName
   }
 
   return (
