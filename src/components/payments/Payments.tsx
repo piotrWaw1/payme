@@ -73,7 +73,7 @@ export default function Payments() {
           </TableBody>
         </Table>
         {!!historyData?.count &&
-            <PaginationUtil count={count} maxDisplay={10}/>
+            <PaginationUtil count={count}/>
         }
       </>
   )
