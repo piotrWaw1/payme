@@ -1,41 +1,28 @@
 import {Input} from "@/components/ui/input.tsx";
-import {ChangeEvent, useContext, useEffect, useRef, useState} from "react";
-import {TableFiltersContext} from "@/context/TableFiltersContext.tsx";
+import {ChangeEvent, useContext, useState} from "react";
 import {ParamContext} from "@/context/ParamContext.tsx";
 
 export default function NameSearch() {
-  const {getPayersData, filterName} = useContext(TableFiltersContext)
-  const {setParam} = useContext(ParamContext)
+  const {setParam, setPage} = useContext(ParamContext)
   const [nameValue, setNameValue] = useState('')
-  const [value, setValue] = useState('')
-  const delayTime = useRef<number | null>(null)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPage("1")
     const {value} = e.target
     setNameValue(value)
     setParam(value, "name")
 
-    if (delayTime.current) {
-      clearTimeout(delayTime.current)
-    }
-
-    delayTime.current = window.setTimeout(() => {
-      setValue(e.target.value)
-    }, 800)
-
+    // if (delayTime.current) {
+    //   clearTimeout(delayTime.current)
+    // }
+    //
+    // delayTime.current = window.setTimeout(() => {
+    //   getPayersData('payers')
+    //   // console.log("pause")
+    // }, 2000)
   }
-  useEffect(() => {
-    if (value !== '') {
-      filterName()
-    } else {
-      getPayersData('payers')
-    }
-    return () => {
-      if (delayTime.current) {
-        clearTimeout(delayTime.current);
-      }
-    };
-  }, [filterName, getPayersData, value]);
+
+
 
   return (
       <Input

@@ -14,6 +14,7 @@ import {Tables} from "../../../../supabase.ts";
 import IsActiveFilter from "@/components/payer/table/IsActiveFilter.tsx";
 import NameSearch from "@/components/payer/table/NameSearch.tsx";
 import PaymentTimeFilter from "@/components/payer/table/PaymentTimeFilter.tsx";
+import MaxElements from "@/components/util/pagination/MaxElements.tsx";
 
 
 export default function PayersTable() {
@@ -22,37 +23,35 @@ export default function PayersTable() {
   const {tableData, getPayersData, loading} = useContext(TableFiltersContext)
   const {data, count} = tableData
   const payersData = data as Tables<"payers">[]
-  const {page, maxData, active, time} = useContext(ParamContext)
+  const {page, maxData} = useContext(ParamContext)
 
   const calcItems = (page: number) => {
     const result = Number(maxData) * (Number(page))
     return result > count ? count : result + 1
   }
 
-  // TODO: make search by name,
-  //  sort names alphabetically,
-  //  show all active and inactive payers
-
   useEffect(() => {
     getPayersData('payers')
-  }, [getPayersData, page, maxData, active, time]);
+  }, [getPayersData]);
   return (
       <>
-        <div className="flex justify-between mb-10">
+        <div className="flex justify-between mb-5">
           <NameSearch/>
           <div className="flex gap-4">
             <PaymentTimeFilter/>
             <IsActiveFilter/>
           </div>
-
         </div>
         <Table className="border-2 ">
           <TableCaption>
             <div className="flex justify-between">
-              <span>Showing {calcItems(Number(page) - 1)} to {calcItems(Number(page)) - 1} of {count} row(s).</span>
+              <div className="flex flex-col items-start">
+                <span>Showing {calcItems(Number(page) - 1)} to {calcItems(Number(page)) - 1} of {count} row(s).</span>
+                <MaxElements/>
+              </div>
               <div>
                 {!!count &&
-                    <PaginationUtil count={count} maxDisplay={10}/>
+                    <PaginationUtil count={count}/>
                 }
               </div>
             </div>

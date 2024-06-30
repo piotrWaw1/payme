@@ -1,7 +1,7 @@
 import {createContext, FC, ReactNode} from "react";
 import {useSearchParams} from "react-router-dom";
 
-type ParamTypes = "time" | "active" | "name"
+type ParamTypes = "time" | "active" | "name" | "maxData"
 
 interface ParamContextData {
   page: string;
@@ -49,6 +49,7 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
     setParams(prev => {
       const result = new URLSearchParams(prev)
       result.set(param, value)
+      result.set('page', '1')
       return result
     })
   }

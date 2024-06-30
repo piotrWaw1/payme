@@ -1,5 +1,5 @@
 import {Tables} from "../../supabase.ts";
-import {createContext, FC, ReactNode, useCallback, useContext, useState} from "react";
+import {createContext, FC, ReactNode, useCallback, useContext, useRef, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
 import {ParamContext} from "@/context/ParamContext.tsx";
 
@@ -14,7 +14,7 @@ interface PayersFiltersContextData {
   tableData: TableData;
   loading: boolean;
   getPayersData: (table: TableType) => void;
-  filterName: () => void
+  // filterName: () => void
 }
 
 const DEFAULT_DATA = {
@@ -26,15 +26,17 @@ export const TableFiltersContext = createContext<PayersFiltersContextData>({
   tableData: DEFAULT_DATA,
   loading: false,
   getPayersData: () => undefined,
-  filterName: ()=>undefined
+  // filterName: () => undefined
 })
 
 export const TableFiltersProvider: FC<{ children: ReactNode }> = ({children}) => {
   const [tableData, setTableData] = useState<TableData>(DEFAULT_DATA)
   const [loading, setLoading] = useState(false)
   const {page, maxData, active, time, name} = useContext(ParamContext)
+  const delayTime = useRef<number | null>(null)
 
   const getPayersData = useCallback(async (table: TableType) => {
+    // console.log("PayerData")
     setLoading(true)
 
     const startData = Number(maxData) * (Number(page) - 1)
@@ -49,29 +51,36 @@ export const TableFiltersProvider: FC<{ children: ReactNode }> = ({children}) =>
     if (time !== 'all') {
       query = query.eq('payment_time', time)
     }
+    if (name != ''){
+      query = query.filter('payer_name', 'ilike', `%${name}%`)
+      if (delayTime.current) {
+        clearTimeout(delayTime.current)
+      }
+    }
+
     const {data, count} = await query
-    // const {data, count} = await supabaseClient.from(table)
-    //     .select('*', {count: 'exact'})
-    //     .range(startData, endData)
+    delayTime.current = window.setTimeout(() => {
 
+    }, 2000)
     setTableData({data, count: count || 0})
     setLoading(false)
-  }, [active, maxData, page, time])
+    // setTableData({data, count: count || 0})
+  }, [active, maxData, name, page, time])
 
-  const filterName = useCallback(async () => {
-    setLoading(true)
-    const {data, count} = await supabaseClient.from('payers')
-        .select('*', {count: "exact"})
-        .filter('payer_name', 'ilike', `%${name}%`)
-    setTableData({data, count: count || 0})
-    setLoading(false)
-  }, [name])
+  // const filterName = useCallback(async () => {
+  //   setLoading(true)
+  //   const {data, count} = await supabaseClient.from('payers')
+  //       .select('*', {count: "exact"})
+  //       .filter('payer_name', 'ilike', `%${name}%`)
+  //   setTableData({data, count: count || 0})
+  //   setLoading(false)
+  // }, [name])
 
   const contextData = {
     tableData,
     loading,
     getPayersData,
-    filterName
+    // filterName
   }
 
   return (
