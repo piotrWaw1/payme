@@ -42,7 +42,7 @@ export default function PayersTable() {
             <IsActiveFilter/>
           </div>
         </div>
-        <Table className="border-2 ">
+        <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white">
           <TableCaption>
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
@@ -57,7 +57,7 @@ export default function PayersTable() {
             </div>
           </TableCaption>
           <TableHeader>
-            <TableRow>
+            <TableRow className="dark:border-slate-500">
               <TableHead className="text-start">Payer name</TableHead>
               <TableHead className="text-center">Payment time</TableHead>
               <TableHead className="text-center">Active</TableHead>
@@ -67,7 +67,7 @@ export default function PayersTable() {
           <TableBody>
             {payersData?.length !== 0 && payersData?.map((element) => (
                 <HoverCard key={element.id}>
-                  <TableRow>
+                  <TableRow className="dark:border-slate-500">
                     <TableCell className="text-start">
                       <HoverCardTrigger>
                         {element.payer_name}

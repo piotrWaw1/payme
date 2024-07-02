@@ -27,7 +27,7 @@ export default function NameSearch() {
   return (
       <Input
           placeholder="Filter payers names..."
-          className="max-w-sm"
+          className="max-w-sm dark:text-white"
           value={nameValue}
           onChange={handleChange}
       />

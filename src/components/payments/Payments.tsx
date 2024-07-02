@@ -27,17 +27,22 @@ export default function Payments() {
   return (
       <>
         <div className="flex justify-between">
-          <h2 className="text-3xl font-bold mb-3">List of all payments</h2>
+          <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of all payments</h2>
           <div>
             <Link to={"add"}>
-              <Button className=" bg-green-600 hover:bg-green-500">Add</Button>
+              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">Add</Button>
             </Link>
           </div>
         </div>
-        <Table className="border-2">
-          <TableCaption>A list of your recent invoices.</TableCaption>
+        <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white">
+          <TableCaption>
+            A list of your recent invoices.
+            {!!historyData?.count &&
+                <PaginationUtil count={count}/>
+            }
+          </TableCaption>
           <TableHeader>
-            <TableRow>
+            <TableRow className="dark:border-slate-500">
               <TableHead className="text-start">Payer name</TableHead>
               <TableHead className="text-center">Date</TableHead>
               <TableHead className="text-center">Price</TableHead>
@@ -46,7 +51,7 @@ export default function Payments() {
           </TableHeader>
           <TableBody>
             {!historyLoading && data?.map(element => (
-                <TableRow key={element.id}>
+                <TableRow className="dark:border-slate-500" key={element.id }>
                   <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{dateFormat(element.date)}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
@@ -72,9 +77,7 @@ export default function Payments() {
             }
           </TableBody>
         </Table>
-        {!!historyData?.count &&
-            <PaginationUtil count={count}/>
-        }
+
       </>
   )
 }

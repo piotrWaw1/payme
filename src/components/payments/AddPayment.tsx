@@ -39,7 +39,7 @@ export default function AddPayment() {
   return (
       <div className="flex justify-center">
         <div className="w-96">
-          <h2 className="text-3xl font-bold mb-3">Add payment</h2>
+          <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">Add payment</h2>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(sendForm)}>
               <FormField
@@ -47,9 +47,9 @@ export default function AddPayment() {
                   name="price"
                   render={({field}) => (
                       <FormItem>
-                        <FormLabel>Price</FormLabel>
+                        <FormLabel className="dark:text-slate-300">Price</FormLabel>
                         <FormControl>
-                          <Input disabled={paymentLoading} type="number" placeholder="0.00" {...field} />
+                          <Input className="dark:text-slate-400" disabled={paymentLoading} type="number" placeholder="0.00" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
@@ -59,9 +59,9 @@ export default function AddPayment() {
                   name="payer_id"
                   render={({field}) => (
                       <FormItem>
-                        <FormLabel>Payer</FormLabel>
+                        <FormLabel className="dark:text-slate-300">Payer</FormLabel>
                         <Select disabled={paymentLoading} onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
+                          <FormControl className="dark:text-slate-400">
                             <SelectTrigger className="w-[180px]">
                               <SelectValue placeholder="Select payer"/>
                             </SelectTrigger>
@@ -84,10 +84,10 @@ export default function AddPayment() {
                   name="date"
                   render={({field}) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel>Date</FormLabel>
+                        <FormLabel className="dark:text-slate-300">Date</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
-                            <FormControl>
+                            <FormControl className="dark:text-slate-400">
                               <Button
                                   disabled={paymentLoading}
                                   variant={"outline"}
@@ -122,7 +122,7 @@ export default function AddPayment() {
                 {paymentLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
                 Submit
               </Button>
-              <Button disabled={paymentLoading} type="reset" onClick={resetValues}>
+              <Button variant="secondary" disabled={paymentLoading} type="reset" onClick={resetValues}>
                 Reset
               </Button>
             </form>

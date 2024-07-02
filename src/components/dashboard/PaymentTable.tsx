@@ -23,10 +23,10 @@ export default function PaymentTable() {
 
 
   return (
-      <Table className="border-2 ">
+      <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white ">
         <TableCaption>List of 10 latest payments</TableCaption>
         <TableHeader>
-          <TableRow>
+          <TableRow className="dark:border-slate-500">
             <TableHead className="text-start">Payer</TableHead>
             <TableHead className="text-center">Date</TableHead>
             <TableHead className="text-right">Price</TableHead>
@@ -34,7 +34,7 @@ export default function PaymentTable() {
         </TableHeader>
         <TableBody>
           {historyData?.data?.length !== 0 && data?.map(element => (
-                  <TableRow key={element.id}>
+                  <TableRow className="dark:border-slate-500" key={element.id}>
                     <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                     <TableCell className="text-center">{dateFormat(element.date)}</TableCell>
                     <TableCell className="text-right">{element.price} PLN</TableCell>

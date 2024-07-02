@@ -16,28 +16,28 @@ export default function Payer() {
   const {getPayerData, payerData, payerLoading} = usePayer()
 
   return (
-      <div className="flex flex-col justify-center items-center">
-        <div className="border p-3 rounded-2xl shadow-2xl	w-80">
+      <div className="flex flex-col justify-center items-center ">
+        <div className="border p-3 rounded-2xl shadow-2xl dark:shadow-slate-800	w-80 dark:bg-slate-700">
           {payerLoading &&
               <div className="flex items-center justify-center">
-                  <span className="text-lg font-medium">Loading</span>
+                  <span className="text-lg font-medium dark:text-slate-300">Loading</span>
                   <Loader2 className="ml-2 animate-spin"/>
               </div>
           }
           {!payerLoading && payerData?.id &&
               <>
-                  <h2 className="text-3xl font-bold text-center border-b border-black p-2">{payerData?.payer_name}</h2>
-                  <div className="border-b border-black pb-3">
-                      <p className="font-semibold flex gap-2 items-center mt-3 mb-1">
+                  <h2 className="text-3xl font-bold text-center border-b-2 border-black dark:border-slate-500 p-2 dark:text-slate-200">{payerData?.payer_name}</h2>
+                  <div className="border-b-2 border-black dark:border-slate-500 pb-3">
+                      <p className="font-semibold flex gap-2 items-center mt-3 mb-1 dark:text-slate-300">
                           Active:
                         <ActiveInactive active={payerData.active}/>
                       </p>
-                      <span className="font-semibold">Payment time: <span
-                          className="font-normal">{payerData?.payment_time} month</span></span>
+                      <span className="font-semibold dark:text-slate-300">Payment time: <span
+                          className="font-normal dark:text-slate-300">{payerData?.payment_time} month</span></span>
                   </div>
                   <div className="mt-2">
-                      <p className="font-semibold">Description</p>
-                      <p className="mt-1">{payerData?.description}</p>
+                      <p className="font-semibold dark:text-slate-300">Description</p>
+                      <p className="mt-1 dark:text-slate-300">{payerData?.description}</p>
                   </div>
                   <div className="mt-2 flex justify-end">
                       <Dialog>

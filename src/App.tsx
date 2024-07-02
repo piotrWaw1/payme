@@ -8,7 +8,7 @@ function App() {
   const {darkMode} = useDarkMode()
   return (
       <>
-        <div className={cn(darkMode && "dark")}>
+        <div className={cn("min-h-screen",darkMode && "dark bg-slate-900")}>
           <Header/>
           <div className="container mt-10">
             <Outlet/>

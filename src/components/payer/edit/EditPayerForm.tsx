@@ -71,7 +71,7 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, getPayerData}) => {
               name="payer_name"
               render={({field}) => (
                   <FormItem>
-                    <FormLabel>Payer name</FormLabel>
+                    <FormLabel className="dark:text-slate-200">Payer name</FormLabel>
                     <FormControl>
                       <Input disabled={false} placeholder="John Doe" {...field} />
                     </FormControl>
@@ -83,7 +83,7 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, getPayerData}) => {
               name="payment_time"
               render={({field}) => (
                   <FormItem>
-                    <FormLabel>Payment type</FormLabel>
+                    <FormLabel className="dark:text-slate-300">Payment type</FormLabel>
                     <Select disabled={false} value={`${field.value}`} onValueChange={field.onChange}>
                       <FormControl>
                         <SelectTrigger className="w-[180px]">
@@ -105,7 +105,7 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, getPayerData}) => {
               name="description"
               render={({field}) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel className="dark:text-slate-300">Description</FormLabel>
                     <FormControl>
                       <Input disabled={false} placeholder="Some info" {...field} />
                     </FormControl>
@@ -126,7 +126,7 @@ const EditPayerForm: FC<EditPayerFormProps> = ({payerData, getPayerData}) => {
                       />
                       <label
                           htmlFor="terms"
-                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-slate-300"
                       >
                         Is payer active?
                       </label>

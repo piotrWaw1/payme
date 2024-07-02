@@ -27,7 +27,7 @@ export default function AddPayerForm() {
   return (
       <div className="flex justify-center">
         <div className="w-96">
-          <h2 className="text-3xl font-bold mb-3">Add new payer</h2>
+          <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">Add new payer</h2>
           <p className="text-red-500 font-bold">{payersError}</p>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(sendForm)}>
@@ -36,9 +36,9 @@ export default function AddPayerForm() {
                   name="payer_name"
                   render={({field}) => (
                       <FormItem>
-                        <FormLabel>Payer name</FormLabel>
+                        <FormLabel className="dark:text-slate-300">Payer name</FormLabel>
                         <FormControl>
-                          <Input disabled={payersLoading} placeholder="John Doe" {...field} />
+                          <Input className="dark:text-slate-200" disabled={payersLoading} placeholder="John Doe" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
@@ -48,9 +48,9 @@ export default function AddPayerForm() {
                   name="payment_time"
                   render={({field}) => (
                       <FormItem>
-                        <FormLabel>Payment type</FormLabel>
-                        <Select disabled={payersLoading} onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
+                        <FormLabel className="dark:text-slate-300">Payment type</FormLabel>
+                        <Select  disabled={payersLoading} onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl className="dark:text-slate-400">
                             <SelectTrigger className="w-[180px]">
                               <SelectValue placeholder="Select payment type"/>
                             </SelectTrigger>
@@ -70,9 +70,9 @@ export default function AddPayerForm() {
                   name="description"
                   render={({field}) => (
                       <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel className="dark:text-slate-300">Description</FormLabel>
                         <FormControl>
-                          <Input disabled={payersLoading} placeholder="Some info" {...field} />
+                          <Input className="dark:text-slate-200" disabled={payersLoading} placeholder="Some info" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>

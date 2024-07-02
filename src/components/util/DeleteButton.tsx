@@ -49,7 +49,7 @@ const DeleteButton: FC<DeleteDialogProps> = (props) => {
               <Button type="button" variant="secondary">Close</Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button type="button" onClick={() => deleteAction(elementId)}>Delete</Button>
+              <Button variant="destructive" type="button" onClick={() => deleteAction(elementId)}>Delete</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

@@ -42,7 +42,7 @@ export default function EditPayment() {
   return (
       <div className="flex justify-center">
         <div className="w-96">
-          <h2 className="text-3xl font-bold mb-3">Edit payment</h2>
+          <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">Edit payment</h2>
           {paymentData.length !== 0 &&
               <Form {...form}>
                   <form
@@ -53,9 +53,9 @@ export default function EditPayment() {
                           name="price"
                           render={({field}) => (
                               <FormItem>
-                                <FormLabel>Price</FormLabel>
+                                <FormLabel className="dark:text-slate-300">Price</FormLabel>
                                 <FormControl>
-                                  <Input disabled={paymentLoad} type="number" placeholder="0.00" {...field} />
+                                  <Input className="dark:text-slate-400" disabled={paymentLoad} type="number" placeholder="0.00" {...field} />
                                 </FormControl>
                                 <FormMessage/>
                               </FormItem>
@@ -65,10 +65,10 @@ export default function EditPayment() {
                           name="payer_id"
                           render={({field}) => (
                               <FormItem>
-                                <FormLabel>Payer</FormLabel>
+                                <FormLabel className="dark:text-slate-300">Payer</FormLabel>
                                 <Select disabled={paymentLoad} value={`${field.value}`} onValueChange={field.onChange}>
                                   <FormControl>
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[180px] dark:text-slate-400">
                                       <SelectValue placeholder="Select payer"/>
                                     </SelectTrigger>
                                   </FormControl>
@@ -92,10 +92,10 @@ export default function EditPayment() {
                           name="date"
                           render={({field}) => (
                               <FormItem className="flex flex-col">
-                                <FormLabel>Date</FormLabel>
+                                <FormLabel className="dark:text-slate-300">Date</FormLabel>
                                 <Popover>
                                   <PopoverTrigger asChild>
-                                    <FormControl>
+                                    <FormControl className="dark:text-slate-400">
                                       <Button
                                           disabled={paymentLoad}
                                           variant={"outline"}
@@ -130,7 +130,7 @@ export default function EditPayment() {
                         {paymentLoad && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
                           Submit
                       </Button>
-                      <Button disabled={paymentLoad} type="reset" onClick={resetValues}>
+                      <Button variant="secondary" disabled={paymentLoad} type="reset" onClick={resetValues}>
                           Reset
                       </Button>
                   </form>
