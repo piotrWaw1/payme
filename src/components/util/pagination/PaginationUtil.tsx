@@ -1,7 +1,7 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
+  // PaginationEllipsis,
   PaginationItem,
   PaginationNext,
   PaginationPrevious,
@@ -43,9 +43,9 @@ const PaginationUtil: FC<PaginationUtilProps> = ({count}) => {
             />
           </PaginationItem>
           <PaginationNumbers pagesNumber={maxPages}/>
-          <PaginationItem>
-            <PaginationEllipsis/>
-          </PaginationItem>
+          {/*<PaginationItem>*/}
+          {/*  <PaginationEllipsis/>*/}
+          {/*</PaginationItem>*/}
           <PaginationItem>
             <PaginationNext
                 onClick={next}

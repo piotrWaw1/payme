@@ -1,9 +1,9 @@
 import {Input} from "@/components/ui/input.tsx";
-import {ChangeEvent, useContext, useState} from "react";
+import {ChangeEvent, useContext, useEffect, useState} from "react";
 import {ParamContext} from "@/context/ParamContext.tsx";
 
 export default function NameSearch() {
-  const {setParam, setPage} = useContext(ParamContext)
+  const {setParam, setPage, name} = useContext(ParamContext)
   const [nameValue, setNameValue] = useState('')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +22,9 @@ export default function NameSearch() {
     // }, 2000)
   }
 
-
+  useEffect(() => {
+    setNameValue(name)
+  }, [name]);
 
   return (
       <Input

@@ -46,9 +46,9 @@ export default function PayersTable() {
           <TableCaption>
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
-                <span>Showing {calcItems(Number(page) - 1)} to {calcItems(Number(page)) - 1} of {count} row(s).</span>
-                <MaxElements/>
+                <span>Showing {calcItems(Number(page) - 1)} to {page === `${Math.ceil(count / Number(maxData))}` ? count : calcItems(Number(page)) - 1} of {count} row(s).</span>
               </div>
+              <MaxElements/>
               <div>
                 {!!count &&
                     <PaginationUtil count={count}/>
