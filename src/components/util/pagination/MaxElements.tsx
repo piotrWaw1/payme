@@ -19,7 +19,7 @@ export default function MaxElements() {
       <TooltipProvider>
         <Tooltip>
           <div>
-            <TooltipTrigger>
+            <TooltipTrigger asChild>
               <div className="flex flex-row">
 
                 <Button

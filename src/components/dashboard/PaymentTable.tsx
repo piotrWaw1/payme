@@ -11,7 +11,7 @@ import useHistory from "@/hooks/payment/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import {useEffect} from "react";
-import dateFormat from "@/components/util/tableDateFormat.ts";
+import dateFormat from "@/components/util/table/tableDateFormat.ts";
 
 export default function PaymentTable() {
   const {historyData, historyLoading, getNewest} = useHistory()

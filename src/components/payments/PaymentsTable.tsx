@@ -9,21 +9,36 @@ import {
 } from "@/components/ui/table"
 import {Link} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
-import useHistory from "@/hooks/payment/useHistory.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";
 import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import DeleteButton from "@/components/util/DeleteButton.tsx";
 import {useEffect} from "react";
 import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
-import dateFormat from "@/components/util/tableDateFormat.ts";
+import dateFormat from "@/components/util/table/tableDateFormat.ts";
+import {useTableFilters} from "@/hooks/useTableFilters.tsx";
+import MaxElements from "@/components/util/pagination/MaxElements.tsx";
+import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
+import TableCountItems from "@/components/util/table/TableCountItems.tsx";
+import DateRangeFilter from "@/components/payments/tableFilters/DateRangeFilter.tsx";
 
-export default function Payments() {
-  const {getHistory, historyData, historyLoading} = useHistory()
-  const {data, count} = historyData
+interface PaymentsData {
+  id: number;
+  user_id: string;
+  price: number;
+  date: string;
+  payers: {
+    payer_name: string;
+  } | null;
+}
+
+export default function PaymentsTable() {
+  const {getPaymentData, tableData, loading} = useTableFilters()
+  const {data, count} = tableData
+  const paymentsData = data as PaymentsData[]
+
   useEffect(() => {
-    void getHistory()
-  }, [getHistory]);
-
+    getPaymentData().then()
+  }, [getPaymentData]);
   return (
       <>
         <div className="flex justify-between">
@@ -34,12 +49,25 @@ export default function Payments() {
             </Link>
           </div>
         </div>
+        <div className="flex justify-between mb-5">
+          <NameSearch/>
+          <div className="flex gap-4">
+            <DateRangeFilter/>
+          </div>
+        </div>
         <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white">
           <TableCaption>
-            A list of your recent invoices.
-            {!!historyData?.count &&
-                <PaginationUtil count={count}/>
-            }
+            <div className="flex justify-between">
+              <div className="flex flex-col items-start">
+                <TableCountItems count={count}/>
+              </div>
+              <MaxElements/>
+              <div>
+                {!!count &&
+                    <PaginationUtil count={count}/>
+                }
+              </div>
+            </div>
           </TableCaption>
           <TableHeader>
             <TableRow className="dark:border-slate-500">
@@ -50,8 +78,8 @@ export default function Payments() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {!historyLoading && data?.map(element => (
-                <TableRow className="dark:border-slate-500" key={element.id }>
+            {!loading && paymentsData?.map(element => (
+                <TableRow className="dark:border-slate-500" key={element.id}>
                   <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{dateFormat(element.date)}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
@@ -64,15 +92,15 @@ export default function Payments() {
                         description={"This action cannot be undone. This will permanently delete payer and all their data"}
                         elementId={`${element.id}`}
                         table={"payments_history"}
-                        getNewData={getHistory}
+                        getNewData={getPaymentData}
                     />
                   </TableCell>
                 </TableRow>
             ))}
-            {historyLoading &&
+            {loading &&
                 <TableLoadingComponent span={4}/>
             }
-            {!historyLoading && data?.length === 0 &&
+            {!loading && data?.length === 0 &&
                 <NoDataTableRow span={4}/>
             }
           </TableBody>

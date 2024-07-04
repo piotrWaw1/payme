@@ -9,17 +9,16 @@ import PrivateRoute from "@/utils/PrivateRoute.tsx";
 import PublicRoute from "@/utils/PublicRoute.tsx";
 import {SessionProvider} from "@/context/SessionContext.tsx";
 import Dashboard from "@/components/dashboard/Dashboard.tsx";
-import Payers from "@/components/payer/Payers.tsx";
 import './index.css'
 import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
 import Payer from "@/components/payer/Payer.tsx";
-import Payments from "@/components/payments/Payments.tsx";
+import PaymentsTable from "@/components/payments/PaymentsTable.tsx";
 import AddPayment from "@/components/payments/AddPayment.tsx";
 import EditPayment from "@/components/payments/EditPayment.tsx";
 import Callback from "@/Callback.tsx";
 import {ParamProvider} from "@/context/ParamContext.tsx";
-import {TableFiltersProvider} from "@/context/TableFiltersContext.tsx";
 import {DarkModeProvider} from "@/context/DarkModeContext.tsx";
+import PayersTable from "@/components/payer/PayersTable.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +38,7 @@ const router = createBrowserRouter([
         path: '/payments',
         element:
             <ParamProvider>
-              <Payments/>
+              <PaymentsTable/>
             </ParamProvider>
       },
       {
@@ -54,9 +53,7 @@ const router = createBrowserRouter([
         path: '/payers',
         element:
             <ParamProvider>
-              <TableFiltersProvider>
-                <Payers/>
-              </TableFiltersProvider>
+              <PayersTable/>
             </ParamProvider>
       },
       {

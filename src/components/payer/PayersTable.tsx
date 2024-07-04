@@ -7,34 +7,37 @@ import NoDataTableRow from "@/components/util/NoDataTableRow.tsx";
 import DeleteButton from "@/components/util/DeleteButton.tsx";
 import ActiveInactive from "@/components/payer/util/ActiveInactive.tsx";
 import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
-import {useContext, useEffect} from "react";
-import {ParamContext} from "@/context/ParamContext.tsx";
-import {TableFiltersContext} from "@/context/TableFiltersContext.tsx";
-import {Tables} from "../../../../supabase.ts";
-import IsActiveFilter from "@/components/payer/table/IsActiveFilter.tsx";
-import NameSearch from "@/components/payer/table/NameSearch.tsx";
-import PaymentTimeFilter from "@/components/payer/table/PaymentTimeFilter.tsx";
+import {useEffect} from "react";
+import {useTableFilters} from "@/hooks/useTableFilters.tsx";
+import {Tables} from "../../../supabase.ts";
+import IsActiveFilter from "@/components/payer/tableFilters/IsActiveFilter.tsx";
+import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
+import PaymentTimeFilter from "@/components/payer/tableFilters/PaymentTimeFilter.tsx";
 import MaxElements from "@/components/util/pagination/MaxElements.tsx";
+import TableCountItems from "@/components/util/table/TableCountItems.tsx";
 
 
 export default function PayersTable() {
 
   // const {getPayers, payersData, payersLoading} = usePayers("all")
-  const {tableData, getPayersData, loading} = useContext(TableFiltersContext)
+  const {tableData, getPayersData, loading} = useTableFilters()
   const {data, count} = tableData
   const payersData = data as Tables<"payers">[]
-  const {page, maxData} = useContext(ParamContext)
 
-  const calcItems = (page: number) => {
-    const result = Number(maxData) * (Number(page))
-    return result > count ? count : result + 1
-  }
 
   useEffect(() => {
-    getPayersData('payers')
+    getPayersData().then()
   }, [getPayersData]);
   return (
       <>
+        <div className="flex justify-between">
+          <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of payers</h2>
+          <div>
+            <Link to={"add"}>
+              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">Add</Button>
+            </Link>
+          </div>
+        </div>
         <div className="flex justify-between mb-5">
           <NameSearch/>
           <div className="flex gap-4">
@@ -46,7 +49,7 @@ export default function PayersTable() {
           <TableCaption>
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
-                <span>Showing {calcItems(Number(page) - 1)} to {page === `${Math.ceil(count / Number(maxData))}` ? count : calcItems(Number(page)) - 1} of {count} row(s).</span>
+                <TableCountItems count={count}/>
               </div>
               <MaxElements/>
               <div>
@@ -89,7 +92,7 @@ export default function PayersTable() {
                           description={"This action cannot be undone. This will permanently delete payer and all their data"}
                           elementId={`${element.id}`}
                           table={'payers'}
-                          getNewData={() => getPayersData("payers")}
+                          getNewData={getPayersData}
                       />
                     </TableCell>
                   </TableRow>
