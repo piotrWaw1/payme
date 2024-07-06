@@ -4,6 +4,7 @@ import {eu} from "date-fns/locale";
 import {format, parse, startOfWeek, getDay, parseISO, startOfMonth, endOfMonth, getMonth} from "date-fns";
 import {useCallback, useEffect, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
+import {Loader2} from "lucide-react";
 
 const locales = {
   'en-US': eu,
@@ -26,9 +27,11 @@ export default function Calendar() {
 
   const [date, setDate] = useState(new Date())
   const [paymentData, setPaymentData] = useState<CalendarData[] | undefined>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const getPayments = async (date: Date) => {
+      setLoading(true)
       const startDate = format(startOfMonth(date), "yyyy-MM-dd")
       const endDate = format(endOfMonth(date), "yyyy-MM-dd")
 
@@ -53,6 +56,7 @@ export default function Calendar() {
       } else {
         setPaymentData([])
       }
+      setLoading(false)
     }
     getPayments(date).then()
   }, [date]);
@@ -67,15 +71,24 @@ export default function Calendar() {
   // console.log(paymentData)
 
   return (
-      <BigCalendar
-          min={parse('1:00am', 'h:mma', new Date())}
-          max={parse('2:00am', 'h:mma', new Date())}
-          className="dark:text-slate-600 dark:bg-slate-100 p-1 rounded"
-          views={["month", "week", "day"]}
-          localizer={localizer}
-          events={paymentData}
-          onNavigate={onNavigate}
-          style={{height: 500}}
-      />
+      <>
+        <BigCalendar
+            min={parse('1:00am', 'h:mma', new Date())}
+            max={parse('2:00am', 'h:mma', new Date())}
+            className="dark:text-slate-600 dark:bg-slate-100 p-1 rounded"
+            views={["month", "week", "day"]}
+            localizer={localizer}
+            events={paymentData}
+            onNavigate={onNavigate}
+            style={{height: 500}}
+        />
+        {loading &&
+            <div className="flex flex-row gap-2 justify-center dark:text-white font-bold mt-3">
+                Loading
+                <Loader2 className="animate-spin"/>
+            </div>
+        }
+
+      </>
   )
 }
