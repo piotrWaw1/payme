@@ -9,7 +9,6 @@ import PrivateRoute from "@/utils/PrivateRoute.tsx";
 import PublicRoute from "@/utils/PublicRoute.tsx";
 import {SessionProvider} from "@/context/SessionContext.tsx";
 import Dashboard from "@/components/dashboard/Dashboard.tsx";
-import './index.css'
 import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
 import Payer from "@/components/payer/Payer.tsx";
 import PaymentsTable from "@/components/payments/PaymentsTable.tsx";
@@ -19,6 +18,8 @@ import Callback from "@/Callback.tsx";
 import {ParamProvider} from "@/context/ParamContext.tsx";
 import {DarkModeProvider} from "@/context/DarkModeContext.tsx";
 import PayersTable from "@/components/payer/PayersTable.tsx";
+import "react-big-calendar/lib/css/react-big-calendar.css"
+import './index.css'
 
 const router = createBrowserRouter([
   {
