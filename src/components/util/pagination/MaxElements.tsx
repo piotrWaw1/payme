@@ -4,9 +4,14 @@ import {ParamContext} from "@/context/ParamContext.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 
+const PAGE_SIZE_OPITONS = [10, 20, 30];
+
+// const a = PAGE_SIZE_OPITONS.at(-1);
+// const b = PAGE_SIZE_OPITONS[PAGE_SIZE_OPITONS.length - 1];
+
 export default function MaxElements() {
   const {maxData, setParam} = useContext(ParamContext)
-  const [quantity, setQuantity] = useState(maxData)
+  const [quantity, setQuantity] = useState(maxData) // TODO out
   const defaultClass = "flex items-center px-3 h-10 font-medium text-secondary-foreground bg-transparent" +
       "cursor-pointer ease-in duration-200 hover:bg-primary hover:text-primary-foreground"
 

@@ -9,7 +9,7 @@ interface PrivateRouteProps {
 const PrivateRoute: FC<PrivateRouteProps> = ({children}) => {
   const session = useSession()
   return (
-      !session ? <Navigate to={'/login'}/> : children
+      !session ? <Navigate to={'/login'} replace /> : children
   )
 }
 export default PrivateRoute

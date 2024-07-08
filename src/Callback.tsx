@@ -11,5 +11,6 @@ export default function Callback() {
       nav('/')
     }
   }, [nav, session]);
+
   return null
 }

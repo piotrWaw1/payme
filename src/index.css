@@ -76,12 +76,15 @@
   }
 
 .rbc-label{
-  display: none;
+  /*display: none;*/
+  @apply hidden;
 }
 .rbc-time-content{
-  display: none;
+  /*display: none;*/
+  @apply hidden;
 }
 .rbc-time-header{
-  height: 100%;
-  overflow: scroll;
+  @apply h-full overflow-auto;
+  /*height: 100%;*/
+  /*overflow: scroll;*/
 }
