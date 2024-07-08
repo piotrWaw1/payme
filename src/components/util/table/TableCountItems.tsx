@@ -12,9 +12,8 @@ export default function TableCountItems({count}: { count: number }) {
   return (
       <>
         {!!count &&
-            <span>
-                Showing {calcItems(Number(page) - 1)}
-                to {page === `${Math.ceil(count / Number(maxData))}` ? count : calcItems(Number(page)) - 1}
+            <span>Showing {calcItems(Number(page) - 1)}&nbsp;
+                to {page === `${Math.ceil(count / Number(maxData))}` ? count : calcItems(Number(page)) - 1}&nbsp;
                 of {count} row(s).
             </span>
         }

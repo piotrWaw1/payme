@@ -1,5 +1,5 @@
 import PaymentTable from "@/components/dashboard/PaymentTable.tsx";
-import Calendar from "@/components/dashboard/Calendar.tsx";
+import Calendar from "@/components/dashboard/Calendar/Calendar.tsx";
 
 export default function Dashboard() {
   return (
