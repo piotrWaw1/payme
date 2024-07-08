@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import Login from "@/components/auth/Login.tsx";
 import SingUp from "@/components/auth/SingUp.tsx";
 import AuthComponent from "@/components/AuthComponent.tsx";
@@ -45,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/payments/add',
         element: <AddPayment/>
+      },
+      {
+        path: '/payments/not-found',
+        element: <Navigate to={"/"} replace/>
       },
       {
         path: '/payments/:id',
