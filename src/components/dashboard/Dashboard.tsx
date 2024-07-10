@@ -1,4 +1,4 @@
-import PaymentTable from "@/components/dashboard/PaymentTable.tsx";
+import PaymentTable from "@/components/dashboard/PaymentTable/PaymentTable.tsx";
 import Calendar from "@/components/dashboard/Calendar/Calendar.tsx";
 
 export default function Dashboard() {

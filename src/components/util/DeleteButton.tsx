@@ -11,6 +11,7 @@ import {
 import {Button} from "@/components/ui/button.tsx";
 import {supabaseClient} from "@/clientDef.ts";
 import {FC} from "react";
+import { Trash2 } from 'lucide-react';
 
 type AllowedTabs = "payers" | "payments_history";
 
@@ -33,8 +34,8 @@ const DeleteButton: FC<DeleteDialogProps> = (props) => {
   return (
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="destructive">
-            Delete
+          <Button className="bg-transparent transition ease-in-out delay-150 hover:bg-destructive dark:hover:bg-red-600 group">
+            <Trash2 className="text-red-600 transition ease-in-out delay-150 group-hover:text-white"/>
           </Button>
         </DialogTrigger>
         <DialogContent>

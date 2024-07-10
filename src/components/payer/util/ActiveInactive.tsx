@@ -1,8 +1,11 @@
+import {Check, X} from 'lucide-react';
+
+
 export default function ActiveInactive({active}: { active: boolean }) {
   return (
       <>
-        {active && <span className="text-green-600 font-bold dark:text-green-500">Active</span>}
-        {!active && <span className="text-red-600 font-bold dark:text-red-500">Inactive</span>}
+        {active && <Check className="text-green-600 dark:text-green-600 inline"/>}
+        {!active && <X className="text-red-600 dark:text-red-600 inline"/>}
       </>
 
   )

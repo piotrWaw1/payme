@@ -82,7 +82,7 @@ export default function AddPayerForm() {
                 {payersLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
                 Submit
               </Button>
-              <Button type="reset" disabled={payersLoading} onClick={resetValues}>
+              <Button variant="secondary" type="reset" disabled={payersLoading} onClick={resetValues}>
                 Reset
               </Button>
             </form>

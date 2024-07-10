@@ -15,6 +15,7 @@ import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
 import PaymentTimeFilter from "@/components/payer/tableFilters/PaymentTimeFilter.tsx";
 import MaxElements from "@/components/util/pagination/MaxElements.tsx";
 import TableCountItems from "@/components/util/table/TableCountItems.tsx";
+import {Info, Plus} from 'lucide-react';
 
 
 export default function PayersTable() {
@@ -34,7 +35,9 @@ export default function PayersTable() {
           <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of payers</h2>
           <div>
             <Link to={"add"}>
-              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">Add</Button>
+              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">
+                <Plus/>
+              </Button>
             </Link>
           </div>
         </div>
@@ -45,9 +48,9 @@ export default function PayersTable() {
             <IsActiveFilter/>
           </div>
         </div>
-        <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white">
+        <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white mb-32">
           <TableCaption>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center h-auto">
               <div className="flex flex-col items-start">
                 <TableCountItems count={count}/>
               </div>
@@ -83,9 +86,11 @@ export default function PayersTable() {
                     <TableCell className="text-center">
                       <ActiveInactive active={element.active}/>
                     </TableCell>
-                    <TableCell className="text-center">
+                    <TableCell className="text-end">
                       <Link to={`${element.id}`}>
-                        <Button type="button" className="mr-2">Info</Button>
+                        <Button type="button" className="bg-transparent hover:bg-primary group">
+                          <Info className="text-primary group-hover:text-secondary"/>
+                        </Button>
                       </Link>
                       <DeleteButton
                           title={`Are you sure you want to delete ${element.payer_name}?`}
