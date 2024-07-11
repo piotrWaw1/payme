@@ -16,7 +16,7 @@ import AddPayment from "@/components/payments/AddPayment.tsx";
 import EditPayment from "@/components/payments/EditPayment.tsx";
 import Callback from "@/Callback.tsx";
 import {ParamProvider} from "@/context/ParamContext.tsx";
-import {DarkModeProvider} from "@/context/DarkModeContext.tsx";
+import {ThemeProvider} from "@/context/ThemeProvider.tsx";
 import PayersTable from "@/components/payer/PayersTable.tsx";
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import './index.css'
@@ -26,9 +26,9 @@ const router = createBrowserRouter([
     path: '/',
     element:
         <PrivateRoute>
-          <DarkModeProvider>
+          <ThemeProvider storageKey="theme">
             <App/>
-          </DarkModeProvider>
+          </ThemeProvider>
         </PrivateRoute>,
     children: [
       {

@@ -20,6 +20,7 @@ import MaxElements from "@/components/util/pagination/MaxElements.tsx";
 import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
 import TableCountItems from "@/components/util/table/TableCountItems.tsx";
 import DateRangeFilter from "@/components/payments/tableFilters/DateRangeFilter.tsx";
+import {Pencil, Plus} from "lucide-react";
 
 interface PaymentsData {
   id: number;
@@ -45,7 +46,9 @@ export default function PaymentsTable() {
           <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of all payments</h2>
           <div>
             <Link to={"add"}>
-              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">Add</Button>
+              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">
+                <Plus/>
+              </Button>
             </Link>
           </div>
         </div>
@@ -55,7 +58,7 @@ export default function PaymentsTable() {
             <DateRangeFilter/>
           </div>
         </div>
-        <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white">
+        <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white mb-32">
           <TableCaption>
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
@@ -83,9 +86,12 @@ export default function PaymentsTable() {
                   <TableCell className="text-start">{element.payers?.payer_name}</TableCell>
                   <TableCell className="text-center">{dateFormat(element.date)}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
-                  <TableCell className="text-center">
+                  <TableCell className="text-end">
                     <Link to={`${element.id}`}>
-                      <Button className="mr-2">Edit</Button>
+                      {/*<Button className="mr-2">Edit</Button>*/}
+                      <Button type="button" className="bg-transparent hover:bg-primary group">
+                        <Pencil className="text-primary group-hover:text-secondary"/>
+                      </Button>
                     </Link>
                     <DeleteButton
                         title={`Are you sure you want to delete ${element.date}?`}

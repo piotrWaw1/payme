@@ -75,7 +75,7 @@ export default function Calendar() {
         <BigCalendar
             min={parse('1:00am', 'h:mma', new Date())}
             max={parse('2:00am', 'h:mma', new Date())}
-            className="dark:text-slate-600 dark:bg-slate-100 p-1 rounded"
+            className="dark:text-primary dark:bg-slate-700 p-1 rounded"
             views={["month", "week", "day"]}
             localizer={localizer}
             events={paymentData}

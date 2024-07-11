@@ -1,14 +1,12 @@
 import {Outlet} from "react-router-dom";
 import Header from "@/components/header/Header.tsx";
 import {Toaster} from "@/components/ui/toaster.tsx";
-import {cn} from "@/lib/utils.ts";
-import useDarkMode from "@/hooks/useDarkMode.tsx";
 
 function App() {
-  const {darkMode} = useDarkMode()
+// ,darkMode && "dark bg-slate-900"
   return (
       <>
-        <div className={cn("min-h-screen",darkMode && "dark bg-slate-900")}>
+        <div className={"min-h-screen dark:bg-slate-900"}>
           <Header/>
           <div className="container mt-10">
             <Outlet/>

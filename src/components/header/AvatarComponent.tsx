@@ -28,7 +28,6 @@ export default function AvatarComponent() {
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator/>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

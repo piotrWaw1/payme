@@ -34,8 +34,8 @@ const DeleteButton: FC<DeleteDialogProps> = (props) => {
   return (
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="bg-transparent transition ease-in-out delay-150 hover:bg-destructive dark:hover:bg-red-600 group">
-            <Trash2 className="text-red-600 transition ease-in-out delay-150 group-hover:text-white"/>
+          <Button className="bg-transparent transition ease-in-out delay-150 hover:bg-destructive dark:hover:bg-rose-500 group">
+            <Trash2 className="text-rose-500 transition ease-in-out delay-150 group-hover:text-white"/>
           </Button>
         </DialogTrigger>
         <DialogContent>
