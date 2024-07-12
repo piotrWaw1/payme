@@ -45,7 +45,7 @@ export default function PaymentsTable() {
         <div className="flex justify-between">
           <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of all payments</h2>
           <div>
-            <Link to={"add"}>
+            <Link to={"add"} tabIndex={-1}>
               <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">
                 <Plus/>
               </Button>
@@ -87,9 +87,9 @@ export default function PaymentsTable() {
                   <TableCell className="text-center">{dateFormat(element.date)}</TableCell>
                   <TableCell className="text-center">{element.price} PLN</TableCell>
                   <TableCell className="text-end">
-                    <Link to={`${element.id}`}>
+                    <Link to={`${element.id}`} tabIndex={-1}>
                       {/*<Button className="mr-2">Edit</Button>*/}
-                      <Button type="button" className="bg-transparent hover:bg-primary group">
+                      <Button type="button" className="bg-transparent hover:bg-primary group" >
                         <Pencil className="text-primary group-hover:text-secondary"/>
                       </Button>
                     </Link>

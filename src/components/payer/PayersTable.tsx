@@ -34,8 +34,8 @@ export default function PayersTable() {
         <div className="flex justify-between">
           <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of payers</h2>
           <div>
-            <Link to={"add"}>
-              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">
+            <Link to={"add"} tabIndex={-1}>
+              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white" >
                 <Plus/>
               </Button>
             </Link>
@@ -87,7 +87,7 @@ export default function PayersTable() {
                       <ActiveInactive active={element.active}/>
                     </TableCell>
                     <TableCell className="text-end">
-                      <Link to={`${element.id}`}>
+                      <Link to={`${element.id}`} tabIndex={-1}>
                         <Button type="button" className="bg-transparent hover:bg-primary group">
                           <Info className="text-primary group-hover:text-secondary"/>
                         </Button>

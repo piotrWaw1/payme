@@ -1,12 +1,14 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu.tsx";
-import {Button} from "@/components/ui/button.tsx";
-import {ChevronDown} from "lucide-react";
 import {useContext, useEffect, useState} from "react";
 import {ParamContext} from "@/context/ParamContext.tsx";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select.tsx";
 
 export default function IsActiveFilter() {
   const [selected, setSelected] = useState("all")
@@ -20,32 +22,18 @@ export default function IsActiveFilter() {
   }, [active]);
 
   return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto dark:text-slate-300">
-            Payer active <ChevronDown className="ml-2 h-4 w-4"/>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Payers active filter</DropdownMenuLabel>
-          <DropdownMenuSeparator/>
-          <DropdownMenuRadioGroup value={selected} onValueChange={update}>
-            <DropdownMenuRadioItem
-                value="all">
-              All
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem
-                value="true"
-            >
-              Active
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem
-                value="false"
-            >
-              Inactive
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Select onValueChange={update} value={selected}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Payer active"/>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Payer active filter</SelectLabel>
+            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="true" className="text-green-600 dark:text-green-500">Active</SelectItem>
+            <SelectItem value="false" className="text-red-600 dark:text-rose-500 ">Inactive</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
   )
 }
