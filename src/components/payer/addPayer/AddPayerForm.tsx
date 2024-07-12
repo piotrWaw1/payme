@@ -16,7 +16,8 @@ export default function AddPayerForm() {
     resolver: zodResolver(payersSchema),
     defaultValues: {
       payer_name: "",
-      description: ""
+      description: "",
+      payment_time: ""
     }
   })
 
@@ -38,7 +39,8 @@ export default function AddPayerForm() {
                       <FormItem>
                         <FormLabel className="dark:text-slate-300">Payer name</FormLabel>
                         <FormControl>
-                          <Input className="dark:text-slate-200" disabled={payersLoading} placeholder="John Doe" {...field} />
+                          <Input className="dark:text-slate-200" disabled={payersLoading}
+                                 placeholder="John Doe" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
@@ -49,7 +51,12 @@ export default function AddPayerForm() {
                   render={({field}) => (
                       <FormItem>
                         <FormLabel className="dark:text-slate-300">Payment type</FormLabel>
-                        <Select  disabled={payersLoading} onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select
+                            disabled={payersLoading}
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            value={field.value}
+                        >
                           <FormControl className="dark:text-slate-400">
                             <SelectTrigger className="w-[180px]">
                               <SelectValue placeholder="Select payment type"/>
@@ -72,7 +79,8 @@ export default function AddPayerForm() {
                       <FormItem>
                         <FormLabel className="dark:text-slate-300">Description</FormLabel>
                         <FormControl>
-                          <Input className="dark:text-slate-200" disabled={payersLoading} placeholder="Some info" {...field} />
+                          <Input className="dark:text-slate-200" disabled={payersLoading}
+                                 placeholder="Some info" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>

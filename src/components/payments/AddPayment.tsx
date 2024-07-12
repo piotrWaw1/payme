@@ -49,7 +49,8 @@ export default function AddPayment() {
                       <FormItem>
                         <FormLabel className="dark:text-slate-300">Price</FormLabel>
                         <FormControl>
-                          <Input className="dark:text-slate-400" disabled={paymentLoading} type="number" placeholder="0.00" {...field} />
+                          <Input className="dark:text-slate-400" disabled={paymentLoading} type="number"
+                                 placeholder="0.00" {...field} />
                         </FormControl>
                         <FormMessage/>
                       </FormItem>
@@ -60,7 +61,12 @@ export default function AddPayment() {
                   render={({field}) => (
                       <FormItem>
                         <FormLabel className="dark:text-slate-300">Payer</FormLabel>
-                        <Select disabled={paymentLoading} onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select
+                            disabled={paymentLoading}
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            value={field.value}
+                        >
                           <FormControl className="dark:text-slate-400">
                             <SelectTrigger className="w-[180px]">
                               <SelectValue placeholder="Select payer"/>
@@ -70,7 +76,7 @@ export default function AddPayment() {
                             {data?.map(element => (
                                 <SelectItem value={`${element.id}`} key={element.id}>{element.payer_name}</SelectItem>
                             ))}
-                            {data?.length === 0  &&
+                            {data?.length === 0 &&
                                 <SelectItem disabled value="0">No data</SelectItem>
                             }
                           </SelectContent>
