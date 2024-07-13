@@ -28,7 +28,7 @@ const DEFAULT_DATA = {
 export const useTableFilters = () => {
   const [tableData, setTableData] = useState<TableData>(DEFAULT_DATA)
   const [loading, setLoading] = useState(false)
-  const {page, maxData, active, time, name, dateStart, dateEnd} = useContext(ParamContext)
+  const {page, maxData, active, time, name, dateRange} = useContext(ParamContext)
   const delayTime = useRef<number | null>(null)
 
   const calcStartEndData = useCallback(() => {
@@ -84,25 +84,24 @@ export const useTableFilters = () => {
     let query = supabaseClient.from("payments_history")
         .select('id, user_id, price, date, payers (payer_name)', {count: 'exact'})
         .range(startData, endData)
+        .order('date', {ascending: false})
 
     //startDate, endDate 
     if (name != '') {
       query = query.filter('payers.payer_name', 'ilike', `%${name}%`)
     }
-    if (dateStart && dateEnd) {
+    if (dateRange) {
+      const [dateStart,dateEnd] = dateRange.split('_')
       query = query
           .gte('date', dateStart)
           .lte('date', dateEnd)
-    }
-    if(dateStart && !dateEnd){
-      query = query.eq('date', dateStart)
     }
     const {data, count} = await query
     const finalData = data ? clearNull(data) : null
     // console.log(finalData)
     setTableData({data: finalData, count: count || 0})
     setLoading(false)
-  }, [calcStartEndData, dateEnd, dateStart, name])
+  }, [calcStartEndData, dateRange, name])
 
   return {getPaymentData, getPayersData, tableData, loading}
 }

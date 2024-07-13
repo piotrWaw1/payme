@@ -52,7 +52,7 @@ export default function PaymentsTable() {
             </Link>
           </div>
         </div>
-        <div className="flex justify-between mb-5">
+        <div className="flex justify-between mb-4">
           <NameSearch/>
           <div className="flex gap-4">
             <DateRangeFilter/>

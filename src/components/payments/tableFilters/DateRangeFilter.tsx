@@ -1,5 +1,5 @@
 import {format} from "date-fns"
-import {Calendar as CalendarIcon} from "lucide-react"
+import {Calendar as CalendarIcon, RotateCcw} from "lucide-react"
 import {DateRange} from "react-day-picker"
 
 import {cn} from "@/lib/utils"
@@ -25,12 +25,21 @@ export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLD
   }
 
   const select = (values: DateRange | undefined) => {
-    setDateRange(formatDate(values?.from), formatDate(values?.to))
+    if (values?.to) {
+      const range = `${formatDate(values.from)}_${formatDate(values.to)}`
+      console.log(range)
+      setDateRange(range)
+    }
     setDate(values)
   }
 
+  const reset = ()=>{
+    setDateRange('')
+    setDate(undefined)
+  }
+
   return (
-      <div className={cn("grid gap-2", className)}>
+      <div className={cn("flex gap-1", className)}>
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -67,6 +76,9 @@ export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLD
             />
           </PopoverContent>
         </Popover>
+        <Button variant="outline" className="border" onClick={reset}>
+          <RotateCcw />
+        </Button>
       </div>
   )
 }

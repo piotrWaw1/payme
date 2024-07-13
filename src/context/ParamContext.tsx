@@ -9,11 +9,10 @@ interface ParamContextData {
   time: string;
   active: string;
   name: string;
-  dateStart: string;
-  dateEnd: string;
+  dateRange: string;
   setPage: (value: string) => void;
   setParam: (value: string, param: ParamTypes) => void;
-  setDateRange: (dateStart: string, dateEnd: string) => void
+  setDateRange: (dateRange: string) => void
 }
 
 const DEFAULT_PAGE = '1'
@@ -29,8 +28,7 @@ export const ParamContext = createContext<ParamContextData>({
   time: DEFAULT_TIME,
   active: DEFAULT_ACTIVE,
   name: DEFAULT_NAME,
-  dateStart: DEFAULT_DATE,
-  dateEnd: DEFAULT_DATE,
+  dateRange: DEFAULT_DATE,
   setPage: () => undefined,
   setParam: () => undefined,
   setDateRange: () => undefined
@@ -44,8 +42,7 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
         time: DEFAULT_TIME,
         active: DEFAULT_ACTIVE,
         name: DEFAULT_NAME,
-        dateStart: DEFAULT_DATE,
-        dateEnd: DEFAULT_DATE,
+        dateRange: DEFAULT_DATE,
       }
   )
   const page = params.get('page') || DEFAULT_PAGE
@@ -53,8 +50,7 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
   const time = params.get('time') || DEFAULT_TIME
   const active = params.get('active') || DEFAULT_ACTIVE
   const name = params.get('name') || DEFAULT_NAME
-  const dateStart = params.get('dateStart') || DEFAULT_DATE
-  const dateEnd = params.get('dateEnd') || DEFAULT_DATE
+  const dateRange = params.get('dateRange') || DEFAULT_DATE
 
   const setParam = (value: string, param: ParamTypes) => {
     setParams(prev => {
@@ -73,11 +69,10 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
     })
   }
 
-  const setDateRange = (dateStart: string, dateEnd: string) => {
+  const setDateRange = (dateRange: string) => {
     setParams(prev => {
       const result = new URLSearchParams(prev)
-      result.set('dateStart', dateStart)
-      result.set('dateEnd', dateEnd)
+      result.set('dateRange', dateRange)
       result.set('page', '1')
       return result
     })
@@ -90,8 +85,7 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
     time,
     active,
     name,
-    dateStart,
-    dateEnd,
+    dateRange,
     setPage,
     setParam,
     setDateRange
