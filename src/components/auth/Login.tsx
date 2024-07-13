@@ -39,7 +39,7 @@ export default function Login() {
   }
 
   return (
-      <div className="relative w-96 p-5 border-2 border-gray-300 bg-white rounded-2xl shadow-2xl">
+      <div className="relative w-96 p-5 border-2 border-gray-300 dark:border-gray-500 bg-white rounded-2xl shadow-2xl dark:bg-slate-900">
         <h2 className="mb-4 text-3xl font-bold">Login</h2>
         <p className="text-red-500 font-bold">{error}</p>
         <Form {...form}>
@@ -80,11 +80,11 @@ export default function Login() {
         </Form>
         <div className="relative flex mt-3 items-center">
           <div className="flex-grow border-t border-b border-gray-400"></div>
-          <span className="font-bold flex-shrink mx-3 text-gray-700">OR CONTINUE WITH</span>
+          <span className="font-bold flex-shrink mx-3 text-gray-700 dark:text-gray-300">OR CONTINUE WITH</span>
           <div className="flex-grow border-t border-b border-gray-400"></div>
         </div>
         <Button onClick={logWithGoogle}
-                className="bg-transparent text-black w-full py-3 mt-3 border border-black font-medium hover:text-white">
+                className="bg-transparent text-primary w-full py-3 mt-3 border border-primary font-medium hover:text-secondary">
           <img className='w-7 h-7' src={google} alt="google"/>
           Google
         </Button>

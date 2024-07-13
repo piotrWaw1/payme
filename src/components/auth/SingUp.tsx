@@ -11,12 +11,11 @@ import {
 } from "@/components/ui/form.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import leftArrow from "/left-small-arrow.svg"
 import {Link} from "react-router-dom";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 import {SignUpData, signUpSchema} from "@/components/auth/formSchema/signUpSchema.ts";
 import useSignUp from "@/hooks/useSignUp.tsx";
-import {Loader2} from "lucide-react";
+import {ArrowLeft, Loader2} from "lucide-react";
 
 export default function SingUp() {
 
@@ -33,22 +32,25 @@ export default function SingUp() {
   })
 
   return (
-      <div className="relative w-96 p-5 pb-6 border-2 border-gray-300 bg-white rounded-2xl shadow-2xl">
+      <div className="relative w-96 p-5 pb-6 border-2 border-gray-300 bg-white rounded-2xl shadow-2xl dark:border-gray-500 dark:bg-slate-900">
         <div className="flex justify-between">
-          <h1 className="mb-4 text-3xl font-bold">Sign Up</h1>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Link to="/login">
-                  <img src={leftArrow} alt="go back arrow"
-                       className="w-12 transition ease-in-out delay-75 hover:scale-125"/>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Go back to login</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <div>
+            <h1 className="mb-4 text-3xl font-bold">Sign Up</h1>
+          </div>
+          <div className="mr-3 flex items-center">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link to="/login" className="group">
+                    <ArrowLeft className="scale-125 transition ease-in-out delay-75 group-hover:scale-150 dark:text-primary"/>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Go back to login</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
         <p className="text-red-500 font-bold">{error}</p>
         <Form {...form}>

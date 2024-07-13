@@ -6,7 +6,7 @@ function App() {
 // ,darkMode && "dark bg-slate-900"
   return (
       <>
-        <div className={"min-h-screen dark:bg-slate-900"}>
+        <div className="min-h-screen dark:bg-slate-900">
           <Header/>
           <div className="container mt-10">
             <Outlet/>
