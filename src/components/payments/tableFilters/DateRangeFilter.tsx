@@ -1,5 +1,5 @@
 import {format} from "date-fns"
-import {Calendar as CalendarIcon, RotateCcw} from "lucide-react"
+import {Calendar as CalendarIcon, RotateCw} from "lucide-react"
 import {DateRange} from "react-day-picker"
 
 import {cn} from "@/lib/utils"
@@ -20,6 +20,8 @@ export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLD
     to: undefined,
   })
 
+  const [animation, setAnimation] = useState(false)
+
   const formatDate = (date: Date | undefined) => {
     return date ? format(new Date(date), "yyyy-MM-dd") : ''
   }
@@ -33,7 +35,7 @@ export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLD
     setDate(values)
   }
 
-  const reset = ()=>{
+  const reset = () => {
     setDateRange('')
     setDate(undefined)
   }
@@ -76,8 +78,12 @@ export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLD
             />
           </PopoverContent>
         </Popover>
-        <Button variant="outline" className="border" onClick={reset}>
-          <RotateCcw />
+        <Button variant="outline" className="border group" onClick={reset}>
+          <RotateCw
+              className={cn(animation && "animate-spin-once delay-75")}
+              onClick={() => setAnimation(true)}
+              onAnimationEnd={() => setAnimation(false)}
+          />
         </Button>
       </div>
   )
