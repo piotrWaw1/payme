@@ -8,11 +8,15 @@ import {
 
 import profileImg from "/profile_img.png"
 import {supabaseClient} from "@/clientDef.ts";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 export default function AvatarComponent() {
   const nav = useNavigate()
+  const location = useLocation()
   const handleLogout = async () => {
+    if (location.pathname !== '/error404') {
+      localStorage.setItem("logoutURL", location.pathname + location.search)
+    }
     await supabaseClient.auth.signOut()
     nav('/login')
   }
