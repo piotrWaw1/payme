@@ -2,6 +2,7 @@ import {Tables} from "../../supabase.ts";
 import {useCallback, useContext, useRef, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
 import {ParamContext} from "@/context/ParamContext.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface PaymentsData {
   id: number;
@@ -30,6 +31,7 @@ export const useTableFilters = () => {
   const [loading, setLoading] = useState(false)
   const {page, maxData, active, time, name, dateRange} = useContext(ParamContext)
   const delayTime = useRef<number | null>(null)
+  const nav = useNavigate()
 
   const calcStartEndData = useCallback(() => {
     const startData = Number(maxData) * (Number(page) - 1)
@@ -62,14 +64,14 @@ export const useTableFilters = () => {
         clearTimeout(delayTime.current)
       }
     }
-    const {data, count} = await query
-    // delayTime.current = window.setTimeout(() => {
-    //
-    // }, 2000)
+    const {data, count, error} = await query
+    if (error) {
+      nav("/error404", {replace: true})
+
+    }
     setTableData({data, count: count || 0})
     setLoading(false)
-    // setTableData({data, count: count || 0})
-  }, [active, calcStartEndData, name, time])
+  }, [active, calcStartEndData, name, nav, time])
 
   const clearNull = (data: PaymentsData[]) => (
       data?.filter(e => e.payers?.payer_name)
@@ -91,17 +93,22 @@ export const useTableFilters = () => {
       query = query.filter('payers.payer_name', 'ilike', `%${name}%`)
     }
     if (dateRange) {
-      const [dateStart,dateEnd] = dateRange.split('_')
+      const [dateStart, dateEnd] = dateRange.split('_')
       query = query
           .gte('date', dateStart)
           .lte('date', dateEnd)
     }
-    const {data, count} = await query
+    const {data, count, error} = await query
+
+    if (error) {
+      nav("/error404", {replace: true})
+    }
+
     const finalData = data ? clearNull(data) : null
     // console.log(finalData)
     setTableData({data: finalData, count: count || 0})
     setLoading(false)
-  }, [calcStartEndData, dateRange, name])
+  }, [calcStartEndData, dateRange, name, nav])
 
   return {getPaymentData, getPayersData, tableData, loading}
 }

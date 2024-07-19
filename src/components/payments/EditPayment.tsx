@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import usePayment from "@/hooks/payment/usePayment.tsx";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form.tsx";
 import {Input} from "@/components/ui/input.tsx";
@@ -13,11 +13,13 @@ import usePayers from "@/hooks/payer/usePayers.tsx";
 import {useForm} from "react-hook-form";
 import {paymentSchema, PaymentSchema} from "@/components/payments/PaymentSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useEffect} from "react";
 
 export default function EditPayment() {
   const {id} = useParams()
   const {payersData} = usePayers("active")
   const {paymentLoad, paymentData, updatePayment} = usePayment(id)
+  const nav = useNavigate()
 
   const form = useForm<PaymentSchema>({
     resolver: zodResolver(paymentSchema),
@@ -38,6 +40,12 @@ export default function EditPayment() {
   const resetValues = () => {
     form.reset()
   }
+
+  useEffect(() => {
+    if (paymentData?.length === 0){
+      nav("/error404", {replace: true})
+    }
+  }, [nav, paymentData?.length]);
 
   return (
       <div className="flex justify-center">
@@ -136,7 +144,7 @@ export default function EditPayment() {
                   </form>
               </Form>
           }
-          {!paymentData?.length && <p className="font-bold text-lg">No data</p>}
+          {/*{!paymentData?.length && <p className="font-bold text-lg">No data</p>}*/}
         </div>
       </div>
   )

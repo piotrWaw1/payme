@@ -3,6 +3,7 @@ import {supabaseClient} from "@/clientDef.ts";
 import {Tables} from "../../../supabase.ts";
 import {PostgrestError} from "@supabase/supabase-js";
 import {ParamContext} from "@/context/ParamContext.tsx";
+import {useNavigate} from "react-router-dom";
 
 type ActionType = "all" | "active" | "inactive"
 
@@ -18,6 +19,7 @@ export default function usePayers(actionType: ActionType) {
   const [payersLoading, setPayersLoading] = useState(false)
   const [payersData, setPayersData] = useState<PayersData>({count: 0, data: []})
   const [payersError, setPayersError] = useState<PostgrestError | null>(null)
+  const nav = useNavigate()
 
   const getPayers = useCallback(async () => {
     setPayersLoading(true)
@@ -30,19 +32,27 @@ export default function usePayers(actionType: ActionType) {
             {
               count: 'exact'
             }).range(startData, endData - 1)
+    console.log(error)
+    if(error){
+      nav("/error404", {replace: true})
+    }
 
     setPayersData({count: count ? count : 0, data})
     setPayersError(error)
     setPayersLoading(false)
-  }, [maxData, page])
+  }, [maxData, nav, page])
 
   const getActivePayers = useCallback(async () => {
     setPayersLoading(true)
     const {data, error} = await supabaseClient.from('payers').select().eq("active", true)
+    if(error){
+      nav("/error404", {replace: true})
+    }
+    
     setPayersData({data, count: 0})
     setPayersError(error)
     setPayersLoading(false)
-  }, [])
+  }, [nav])
 
   useEffect(() => {
     switch (actionType) {

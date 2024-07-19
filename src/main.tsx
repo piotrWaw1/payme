@@ -20,6 +20,8 @@ import {ThemeProvider} from "@/context/ThemeProvider.tsx";
 import PayersTable from "@/components/payer/PayersTable.tsx";
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import './index.css'
+import ErrorPage from "@/pages/ErrorPage.tsx";
+import Error404 from "@/pages/Error404.tsx";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +95,17 @@ const router = createBrowserRouter([
     path: '/callback',
     element: <Callback/>
   },
+  {
+    path: '*',
+    element: <ErrorPage/>
+  },
+  {
+    path: '/error404',
+    element:
+        <ThemeProvider storageKey="theme">
+          <Error404/>
+        </ThemeProvider>
+  }
 ])
 
 

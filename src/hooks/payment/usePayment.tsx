@@ -5,6 +5,7 @@ import {PaymentSchema} from "@/components/payments/PaymentSchema.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
 import {format} from "date-fns";
+import {useNavigate} from "react-router-dom";
 
 
 export default function usePayment(id: string | undefined) {
@@ -14,6 +15,7 @@ export default function usePayment(id: string | undefined) {
       date: "", id: -1, payer_id: -1, price: 0, user_id: ""
     }
   ])
+  const nav = useNavigate()
   const {toast} = useToast()
   const updatePayment = async (data: PaymentSchema) => {
 
@@ -52,7 +54,10 @@ export default function usePayment(id: string | undefined) {
     const getPayment = async () => {
       stePaymentLoad(true)
       if (id) {
-        const {data} = await supabaseClient.from("payments_history").select().eq('id', id)
+        const {data, error} = await supabaseClient.from("payments_history").select().eq('id', id)
+        if(error){
+          nav("/error404", {replace: true})
+        }
         if (data) {
           setPaymentData(data)
           if (data.length === 0) {
@@ -72,7 +77,7 @@ export default function usePayment(id: string | undefined) {
     }
     void getPayment()
 
-  }, [id, toast]);
+  }, [id, nav, toast]);
 
   return {paymentLoad, paymentData, updatePayment}
 }

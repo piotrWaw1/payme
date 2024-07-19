@@ -30,7 +30,7 @@ export default function Payer() {
                   <div className="border-b-2 border-black dark:border-slate-500 pb-3">
                       <p className="font-semibold flex gap-2 items-center mt-3 mb-1 dark:text-slate-300">
                           Active:
-                        <ActiveInactive active={payerData.active}/>
+                          <ActiveInactive active={payerData.active}/>
                       </p>
                       <span className="font-semibold dark:text-slate-300">Payment time: <span
                           className="font-normal dark:text-slate-300">{payerData?.payment_time} month</span></span>
