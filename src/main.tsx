@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Login from "@/components/auth/Login.tsx";
 import SingUp from "@/components/auth/SingUp.tsx";
 import AuthComponent from "@/components/AuthComponent.tsx";
@@ -28,9 +28,7 @@ const router = createBrowserRouter([
     path: '/',
     element:
         <PrivateRoute>
-          <ThemeProvider storageKey="theme">
-            <App/>
-          </ThemeProvider>
+          <App/>
         </PrivateRoute>,
     children: [
       {
@@ -50,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/payments/not-found',
-        element: <Navigate to={"/"} replace/>
+        element: <Error404 desc={"The payment you're looking for doesn't exist."}/>
       },
       {
         path: '/payments/:id',
@@ -68,9 +66,21 @@ const router = createBrowserRouter([
         element: <AddPayerForm/>
       },
       {
+        path: '/payers/not-found',
+        element: <Error404 desc={"The payer you're looking for doesn't exist."}/>
+      },
+      {
         path: '/payers/:id',
         element: <Payer/>
       },
+      {
+        path: '*',
+        element: <ErrorPage/>
+      },
+      {
+        path: '/error404',
+        element: <Error404 desc={"The page you're looking for doesn't exist."}/>
+      }
 
     ]
   },
@@ -88,23 +98,12 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SingUp/>
-      },
+      }
     ]
   },
   {
     path: '/callback',
     element: <Callback/>
-  },
-  {
-    path: '*',
-    element: <ErrorPage/>
-  },
-  {
-    path: '/error404',
-    element:
-        <ThemeProvider storageKey="theme">
-          <Error404/>
-        </ThemeProvider>
   }
 ])
 
@@ -112,7 +111,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <SessionProvider>
-        <RouterProvider router={router}/>
+        <ThemeProvider storageKey="theme">
+          <RouterProvider router={router}/>
+        </ThemeProvider>
       </SessionProvider>
     </React.StrictMode>
 )

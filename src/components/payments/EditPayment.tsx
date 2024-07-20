@@ -42,8 +42,8 @@ export default function EditPayment() {
   }
 
   useEffect(() => {
-    if (paymentData?.length === 0){
-      nav("/error404", {replace: true})
+    if (paymentData?.length === 0) {
+      nav('/payments/not-found', {replace: true})
     }
   }, [nav, paymentData?.length]);
 
@@ -63,7 +63,8 @@ export default function EditPayment() {
                               <FormItem>
                                 <FormLabel className="dark:text-slate-300">Price</FormLabel>
                                 <FormControl>
-                                  <Input className="dark:text-slate-400" disabled={paymentLoad} type="number" placeholder="0.00" {...field} />
+                                  <Input className="dark:text-slate-400" disabled={paymentLoad} type="number"
+                                         placeholder="0.00" {...field} />
                                 </FormControl>
                                 <FormMessage/>
                               </FormItem>

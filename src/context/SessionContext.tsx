@@ -7,6 +7,7 @@ export const SessionContext = createContext<null | Session>(null)
 
 export const SessionProvider = ({children}: { children: ReactNode }) => {
   const [session, setSession] = useState<null | Session>(() => checkSession())
+
   useEffect(() => {
     const {data} = supabaseClient.auth.onAuthStateChange(
         (event, session) => {

@@ -67,8 +67,8 @@ export const useTableFilters = () => {
     const {data, count, error} = await query
     if (error) {
       nav("/error404", {replace: true})
-
     }
+
     setTableData({data, count: count || 0})
     setLoading(false)
   }, [active, calcStartEndData, name, nav, time])

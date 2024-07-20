@@ -8,23 +8,21 @@ function App() {
   const nav = useNavigate()
 
   useEffect(() => {
-    const logoutURL = localStorage.getItem("logoutURL")
-    if (logoutURL) {
-      nav(logoutURL)
+    const lastLink = localStorage.getItem("logoutURL")
+    if (lastLink) {
+      localStorage.removeItem("logoutURL")
+      nav(lastLink)
     }
-    console.log("App loop")
   }, [nav]);
 
   return (
-      <>
-        <div className="min-h-screen dark:bg-slate-900">
-          <Header/>
-          <div className="container mt-10">
-            <Outlet/>
-          </div>
-          <Toaster/>
+      <div className="min-h-screen dark:bg-slate-900 flex flex-col">
+        <Header/>
+        <div className="container flex-grow flex flex-col mt-10">
+          <Outlet/>
         </div>
-      </>
+        <Toaster/>
+      </div>
   )
 }
 

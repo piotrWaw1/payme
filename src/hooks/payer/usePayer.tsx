@@ -18,12 +18,12 @@ export default function usePayer() {
     setPayerLoading(true)
     const {data, error} = await supabaseClient.from("payers").select().eq('id', id)
     if (error) {
-      nav("/error404", {replace: true})
+      nav("/payers/not-found", {replace: true})
     }
 
     if (data) {
       if(!data[0]?.id){
-        nav("/error404", {replace: true})
+        nav("/payers/not-found", {replace: true})
       }
       setPayerData({...data[0]})
     }
