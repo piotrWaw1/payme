@@ -10,11 +10,15 @@ import profileImg from "/profile_img.png"
 import {supabaseClient} from "@/clientDef.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 
+const BADPATH = ['/error404', '/payments/not-found', '/payers/not-found']
+
 export default function AvatarComponent() {
   const nav = useNavigate()
   const location = useLocation()
+
+
   const handleLogout = async () => {
-    if (location.pathname !== '/error404') {
+    if (!BADPATH.includes(location.pathname)) {
       localStorage.setItem("logoutURL", location.pathname + location.search)
     }
     await supabaseClient.auth.signOut()

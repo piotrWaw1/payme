@@ -18,7 +18,7 @@ import TableCountItems from "@/components/util/table/TableCountItems.tsx";
 import {Info, Plus} from 'lucide-react';
 
 
-export default function PayersTable() {
+export default function Payers() {
 
   // const {getPayers, payersData, payersLoading} = usePayers("all")
   const {tableData, getPayersData, loading} = useTableFilters()

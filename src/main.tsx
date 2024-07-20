@@ -11,13 +11,13 @@ import {SessionProvider} from "@/context/SessionContext.tsx";
 import Dashboard from "@/components/dashboard/Dashboard.tsx";
 import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
 import Payer from "@/components/payer/Payer.tsx";
-import PaymentsTable from "@/components/payments/PaymentsTable.tsx";
+import Payments from "@/components/payments/Payments.tsx";
 import AddPayment from "@/components/payments/AddPayment.tsx";
 import EditPayment from "@/components/payments/EditPayment.tsx";
 import Callback from "@/Callback.tsx";
 import {ParamProvider} from "@/context/ParamContext.tsx";
 import {ThemeProvider} from "@/context/ThemeProvider.tsx";
-import PayersTable from "@/components/payer/PayersTable.tsx";
+import Payers from "@/components/payer/Payers.tsx";
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import './index.css'
 import ErrorPage from "@/pages/ErrorPage.tsx";
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: '/payments',
         element:
             <ParamProvider>
-              <PaymentsTable/>
+              <Payments/>
             </ParamProvider>
       },
       {
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         path: '/payers',
         element:
             <ParamProvider>
-              <PayersTable/>
+              <Payers/>
             </ParamProvider>
       },
       {

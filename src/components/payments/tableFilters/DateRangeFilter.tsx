@@ -10,11 +10,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ParamContext} from "@/context/ParamContext.tsx";
 
 export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLDivElement>) {
-  const {setDateRange} = useContext(ParamContext)
+  const {setDateRange, dateRange} = useContext(ParamContext)
   const [date, setDate] = useState<DateRange | undefined>({
     from: undefined,
     to: undefined,
@@ -39,6 +39,15 @@ export default function DateRangeFilter({className,}: React.HTMLAttributes<HTMLD
     setDateRange('')
     setDate(undefined)
   }
+
+  useEffect(() => {
+    if(dateRange){
+      const date = dateRange.split('_')
+      setDate({from: new Date(date[0]), to: new Date(date[1])})
+      // console.log(date)
+    }
+    // console.log("date loop")
+  }, [dateRange]);
 
   return (
       <div className={cn("flex gap-1", className)}>

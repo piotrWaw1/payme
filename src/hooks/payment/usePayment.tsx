@@ -56,20 +56,20 @@ export default function usePayment(id: string | undefined) {
       if (id) {
         const {data, error} = await supabaseClient.from("payments_history").select().eq('id', id)
         if(error){
-          nav("/error404", {replace: true})
+          nav("/payments/not-found", {replace: true})
         }
         if (data) {
           setPaymentData(data)
-          if (data.length === 0) {
-            toast(
-                {
-                  variant: "destructive",
-                  title: "Payment not found.",
-                  description: "This payment does not exist.",
-                  action: <ToastAction altText="Try again">Close</ToastAction>,
-                }
-            )
-          }
+          // if (data.length === 0) {
+          //   toast(
+          //       {
+          //         variant: "destructive",
+          //         title: "Payment not found.",
+          //         description: "This payment does not exist.",
+          //         action: <ToastAction altText="Try again">Close</ToastAction>,
+          //       }
+          //   )
+          // }
         }
         // console.log(data)
         stePaymentLoad(false)

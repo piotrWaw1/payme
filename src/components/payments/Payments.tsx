@@ -32,7 +32,7 @@ interface PaymentsData {
   } | null;
 }
 
-export default function PaymentsTable() {
+export default function Payments() {
   const {getPaymentData, tableData, loading} = useTableFilters()
   const {data, count} = tableData
   const paymentsData = data as PaymentsData[]
