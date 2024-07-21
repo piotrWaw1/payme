@@ -14,7 +14,11 @@ export default function useLogIn() {
       if (error) {
         setError(error.message)
       } else {
-        nav('/')
+        const lastLink = localStorage.getItem("logoutURL")
+        if (lastLink) {
+          localStorage.removeItem("logoutURL")
+          nav(lastLink)
+        }
       }
     } catch (err) {
       setError("Check your internet connection and try again later")
