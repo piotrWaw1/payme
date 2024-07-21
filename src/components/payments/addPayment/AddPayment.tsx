@@ -4,15 +4,15 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Button} from "@/components/ui/button.tsx";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {paymentSchema, PaymentSchema} from "@/components/payments/PaymentSchema.ts";
+import {paymentSchema, PaymentSchema} from "@/components/payments/addPayment/PaymentSchema.ts";
 import usePayers from "@/hooks/payer/usePayers.tsx";
 
-import {Calendar} from "@/components/ui/calendar"
+import {Calendar} from "@/components/ui/calendar.tsx"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover.tsx"
 import {CalendarIcon, Loader2} from "lucide-react";
 import {format} from "date-fns";
 import {cn} from "@/lib/utils.ts";

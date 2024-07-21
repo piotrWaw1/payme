@@ -6,7 +6,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table.tsx"
 import {Link} from "react-router-dom";
 import {Button} from "@/components/ui/button.tsx";
 import TableLoadingComponent from "@/components/util/TableLoadingComponent.tsx";

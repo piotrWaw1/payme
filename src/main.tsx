@@ -8,16 +8,16 @@ import AuthComponent from "@/components/AuthComponent.tsx";
 import PrivateRoute from "@/utils/PrivateRoute.tsx";
 import PublicRoute from "@/utils/PublicRoute.tsx";
 import {SessionProvider} from "@/context/SessionContext.tsx";
-import Dashboard from "@/components/dashboard/Dashboard.tsx";
+import Dashboard from "@/pages/Dashboard.tsx";
 import AddPayerForm from "@/components/payer/addPayer/AddPayerForm.tsx";
 import Payer from "@/components/payer/Payer.tsx";
-import Payments from "@/components/payments/Payments.tsx";
-import AddPayment from "@/components/payments/AddPayment.tsx";
-import EditPayment from "@/components/payments/EditPayment.tsx";
+import Payments from "@/pages/Payments.tsx";
+import AddPayment from "@/components/payments/addPayment/AddPayment.tsx";
+import EditPayment from "@/components/payments/editPayment/EditPayment.tsx";
 import Callback from "@/Callback.tsx";
 import {ParamProvider} from "@/context/ParamContext.tsx";
 import {ThemeProvider} from "@/context/ThemeProvider.tsx";
-import Payers from "@/components/payer/Payers.tsx";
+import Payers from "@/pages/Payers.tsx";
 import "react-big-calendar/lib/css/react-big-calendar.css"
 import './index.css'
 import ErrorPage from "@/pages/ErrorPage.tsx";

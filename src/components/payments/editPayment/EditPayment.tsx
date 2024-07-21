@@ -11,7 +11,7 @@ import {CalendarIcon, Loader2} from "lucide-react";
 import {Calendar} from "@/components/ui/calendar.tsx";
 import usePayers from "@/hooks/payer/usePayers.tsx";
 import {useForm} from "react-hook-form";
-import {paymentSchema, PaymentSchema} from "@/components/payments/PaymentSchema.ts";
+import {paymentSchema, PaymentSchema} from "@/components/payments/addPayment/PaymentSchema.ts";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useEffect} from "react";
 

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {supabaseClient} from "@/clientDef.ts";
 import {Tables} from "../../../supabase.ts";
-import {PaymentSchema} from "@/components/payments/PaymentSchema.ts";
+import {PaymentSchema} from "@/components/payments/addPayment/PaymentSchema.ts";
 import {ToastAction} from "@/components/ui/toast.tsx";
 import {useToast} from "@/components/ui/use-toast.ts";
 import {format} from "date-fns";

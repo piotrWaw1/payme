@@ -9,7 +9,7 @@ import ActiveInactive from "@/components/payer/util/ActiveInactive.tsx";
 import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
 import {useEffect} from "react";
 import {useTableFilters} from "@/hooks/useTableFilters.tsx";
-import {Tables} from "../../../supabase.ts";
+import {Tables} from "../../supabase.ts";
 import IsActiveFilter from "@/components/payer/tableFilters/IsActiveFilter.tsx";
 import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
 import PaymentTimeFilter from "@/components/payer/tableFilters/PaymentTimeFilter.tsx";
