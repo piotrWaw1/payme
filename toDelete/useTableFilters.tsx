@@ -1,7 +1,7 @@
-import {Tables} from "../../supabase.ts";
+import {Tables} from "../supabase.ts";
 import {useCallback, useContext, useRef, useState} from "react";
-import {supabaseClient} from "@/clientDef.ts";
-import {ParamContext} from "@/context/ParamContext.tsx";
+import {supabaseClient} from "../src/clientDef.ts";
+import {ParamContext} from "../src/context/ParamContext.tsx";
 import {useNavigate} from "react-router-dom";
 
 interface PaymentsData {
@@ -56,7 +56,7 @@ export const useTableFilters = () => {
       query = query.eq('active', active)
     }
     if (time !== 'all') {
-      query = query.eq('payment_time', time)
+      query = query.eq('payment_time', '')
     }
     if (name != '') {
       query = query.filter('payer_name', 'ilike', `%${name}%`)
@@ -65,6 +65,7 @@ export const useTableFilters = () => {
       }
     }
     const {data, count, error} = await query
+
     if (error) {
       nav("/error404", {replace: true})
     }

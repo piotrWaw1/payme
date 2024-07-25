@@ -17,14 +17,14 @@ interface ParamContextData {
 
 const DEFAULT_PAGE = '1'
 const DEFAULT_MAX_DATA = '10'
-const DEFAULT_TIME = 'all'
-const DEFAULT_ACTIVE = 'all'
+const DEFAULT_TIME = 'all'//
+const DEFAULT_ACTIVE = 'all'//
 const DEFAULT_NAME = ''
-const DEFAULT_DATE = ''
+const DEFAULT_DATE = '' //
 
 export const ParamContext = createContext<ParamContextData>({
   page: DEFAULT_PAGE,
-  maxData: DEFAULT_MAX_DATA,
+  maxData: DEFAULT_MAX_DATA,// pageSize
   time: DEFAULT_TIME,
   active: DEFAULT_ACTIVE,
   name: DEFAULT_NAME,
@@ -39,10 +39,10 @@ export const ParamProvider: FC<{ children: ReactNode }> = ({children}) => {
       {
         page: DEFAULT_PAGE,
         maxData: DEFAULT_MAX_DATA,
-        time: DEFAULT_TIME,
-        active: DEFAULT_ACTIVE,
+        time: DEFAULT_TIME,//
+        active: DEFAULT_ACTIVE,//
         name: DEFAULT_NAME,
-        dateRange: DEFAULT_DATE,
+        dateRange: DEFAULT_DATE,//
       }
   )
   const page = params.get('page') || DEFAULT_PAGE

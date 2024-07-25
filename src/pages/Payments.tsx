@@ -15,12 +15,12 @@ import DeleteButton from "@/components/util/DeleteButton.tsx";
 import {useEffect} from "react";
 import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
 import dateFormat from "@/components/util/table/tableDateFormat.ts";
-import {useTableFilters} from "@/hooks/useTableFilters.tsx";
 import MaxElements from "@/components/util/pagination/MaxElements.tsx";
 import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
 import TableCountItems from "@/components/util/table/TableCountItems.tsx";
 import DateRangeFilter from "@/components/payments/tableFilters/DateRangeFilter.tsx";
 import {Pencil, Plus} from "lucide-react";
+import useTableFilterQuery from "@/hooks/tableFilters/useTableFilterQuery.tsx";
 
 interface PaymentsData {
   id: number;
@@ -32,14 +32,20 @@ interface PaymentsData {
   } | null;
 }
 
+const TABLE = 'payments_history'
+const FILTERS = ['name', 'dateRange', 'order']
+const COLUMNS = 'id, user_id, price, date, payers (payer_name)'
+
 export default function Payments() {
-  const {getPaymentData, tableData, loading} = useTableFilters()
+
+  // const {getPaymentData, tableData, loading} = useTableFilters()
+  const {getData, loading, tableData} = useTableFilterQuery()
   const {data, count} = tableData
   const paymentsData = data as PaymentsData[]
 
   useEffect(() => {
-    getPaymentData().then()
-  }, [getPaymentData]);
+    getData(TABLE, FILTERS, COLUMNS).then()
+  }, [getData]);
   return (
       <>
         <div className="flex justify-between">
@@ -53,7 +59,7 @@ export default function Payments() {
           </div>
         </div>
         <div className="flex justify-between mb-4">
-          <NameSearch/>
+          <NameSearch name="name"/>
           <div className="flex gap-4">
             <DateRangeFilter/>
           </div>
@@ -89,7 +95,7 @@ export default function Payments() {
                   <TableCell className="text-end">
                     <Link to={`${element.id}`} tabIndex={-1}>
                       {/*<Button className="mr-2">Edit</Button>*/}
-                      <Button type="button" className="bg-transparent hover:bg-primary group" >
+                      <Button type="button" className="bg-transparent hover:bg-primary group">
                         <Pencil className="text-primary group-hover:text-secondary"/>
                       </Button>
                     </Link>
@@ -98,7 +104,7 @@ export default function Payments() {
                         description={"This action cannot be undone. This will permanently delete payer and all their data"}
                         elementId={`${element.id}`}
                         table={"payments_history"}
-                        getNewData={getPaymentData}
+                        getNewData={() => getData(TABLE, FILTERS, COLUMNS).then()}
                     />
                   </TableCell>
                 </TableRow>

@@ -8,44 +8,64 @@ import DeleteButton from "@/components/util/DeleteButton.tsx";
 import ActiveInactive from "@/components/payer/util/ActiveInactive.tsx";
 import PaginationUtil from "@/components/util/pagination/PaginationUtil.tsx";
 import {useEffect} from "react";
-import {useTableFilters} from "@/hooks/useTableFilters.tsx";
 import {Tables} from "../../supabase.ts";
-import IsActiveFilter from "@/components/payer/tableFilters/IsActiveFilter.tsx";
 import NameSearch from "@/components/payer/tableFilters/NameSearch.tsx";
-import PaymentTimeFilter from "@/components/payer/tableFilters/PaymentTimeFilter.tsx";
 import MaxElements from "@/components/util/pagination/MaxElements.tsx";
 import TableCountItems from "@/components/util/table/TableCountItems.tsx";
 import {Info, Plus} from 'lucide-react';
+import {SelectComponent} from "@/components/payer/util/SelectComponent.tsx";
+import useTableFilterQuery from "@/hooks/tableFilters/useTableFilterQuery.tsx";
 
+const TABLE = 'payers'
+const FILTERS = ['name', 'active', 'time']
 
 export default function Payers() {
 
   // const {getPayers, payersData, payersLoading} = usePayers("all")
-  const {tableData, getPayersData, loading} = useTableFilters()
+  // const {tableData, getPayersData, loading} = useTableFilters()
+  const {getData, loading, tableData} = useTableFilterQuery()
   const {data, count} = tableData
   const payersData = data as Tables<"payers">[]
 
-
   useEffect(() => {
-    getPayersData().then()
-  }, [getPayersData]);
+    getData(TABLE, FILTERS).then()
+  }, [getData]);
+
   return (
       <>
         <div className="flex justify-between">
           <h2 className="text-3xl font-bold mb-3 dark:text-slate-200">List of payers</h2>
           <div>
             <Link to={"add"} tabIndex={-1}>
-              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white" >
+              <Button className=" bg-green-600 hover:bg-green-500 dark:text-white">
                 <Plus/>
               </Button>
             </Link>
           </div>
         </div>
         <div className="flex justify-between mb-5">
-          <NameSearch/>
+          <NameSearch name="name"/>
           <div className="flex gap-4">
-            <PaymentTimeFilter/>
-            <IsActiveFilter/>
+            <SelectComponent
+                label="Payment time filter"
+                placeholder="Payment time"
+                propsName="time"
+                values={[
+                  {value: 'all', title: 'All'},
+                  {value: '1', title: '1 month'},
+                  {value: '2', title: '2 months'},
+                  {value: '3', title: '3 months'}
+                ]}
+            />
+            <SelectComponent
+                label="Payer active filter"
+                placeholder="Payer active"
+                propsName="active"
+                values={[
+                  {value: 'all', title: 'All'},
+                  {value: 'true', title: 'Active', className: 'text-green-600 dark:text-green-500'},
+                  {value: 'false', title: 'Inactive', className: 'text-red-600 dark:text-rose-500'}]}
+            />
           </div>
         </div>
         <Table className="border-2 dark:border-slate-500 dark:bg-slate-700 dark:text-white mb-32">
@@ -97,7 +117,7 @@ export default function Payers() {
                           description={"This action cannot be undone. This will permanently delete payer and all their data"}
                           elementId={`${element.id}`}
                           table={'payers'}
-                          getNewData={getPayersData}
+                          getNewData={() => getData(TABLE, FILTERS).then()}
                       />
                     </TableCell>
                   </TableRow>
